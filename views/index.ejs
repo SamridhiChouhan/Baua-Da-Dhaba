@@ -1,0 +1,21 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="Home-page row mt-5">
+  <% for(let foodItem of foodList){ %>
+  <div class="card m-3 p-2" style="width: 20rem">
+    <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 15rem ;" />
+    <div class="card-body py-1">
+      <h5 class="card-title"><%= foodItem.title %></h5>
+      <p class="card-text">
+        <%= foodItem.description %>
+        <p>&#8377;<%= foodItem.price %></p>
+        <form action="/cart/add/<%= foodItem._id %>" method="post">
+          <button class="btn btn-danger">Add</button>
+        </form>
+        </p>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+

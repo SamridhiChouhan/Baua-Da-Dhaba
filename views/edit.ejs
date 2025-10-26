@@ -1,0 +1,21 @@
+<% layout("/layouts/adminPanel") %>
+
+<form action="/admin/edit/<%=food._id%>?_method=PATCH" method="post">
+  <br />
+  Title :
+  <input type="text" name="title" value="<%=food.title   %>" /><br /><br />
+  Description : <textarea name="description"><%=food.description  %></textarea>
+  <br /><br />
+  image Url :
+  <input type="text" name="image[url]" value="<%=food.image.url %>" />
+  <br /><br />
+  enter price:<input type="number" name="price" value="<%=food.price  %>" />
+  <br /><br />
+  category :
+  <input
+    type="text"
+    name="category"
+    value="<%= food.category  %>"
+  /><br /><br />
+  <button>Add</button>
+</form>

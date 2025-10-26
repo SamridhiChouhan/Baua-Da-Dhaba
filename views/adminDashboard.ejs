@@ -1,0 +1,39 @@
+<% layout("/layouts/adminPanel") %>
+
+<div class="mt-5">
+  <% for(food of foodList){ %>
+  <div class="card mt-3 mb-3 p-2" style="max-width: 900px">
+    <div class="row g-0 d-flex align-items-center">
+      <div class="col-md-2">
+        <img
+          src="<%= food.image.url %>"
+          class="img-fluid rounded-start"
+          alt="..."
+          style="height: 8rem; width: 8rem; object-fit: cover"
+        />
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <h5 class="card-title"><%= food.title %></h5>
+          <p class="card-text"><%= food.description %></p>
+          <p class="card-text">Rs. <%= food.price %></p>
+          <p class="card-text">
+            <small class="text-muted">Category : <%= food.category %></small>
+          </p>
+          <a href="/admin/edit/<%=food._id %>" class="btn btn-secondary"
+            >Edit</a
+          >
+
+          <form
+            action="/admin/delete/<%=food._id%>?_method=DELETE"
+            style="display: inline"
+            method="post"
+          >
+            <button class="btn btn-secondary">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>

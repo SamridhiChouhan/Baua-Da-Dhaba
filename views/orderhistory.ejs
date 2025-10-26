@@ -1,0 +1,9 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2>History</h2>
+
+<ul>
+  <% for(order of orders) {%>
+  <li><%= order.totalAmount %></li>
+  <% } %>
+</ul>

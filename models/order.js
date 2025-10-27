@@ -9,7 +9,7 @@ const orderSchema = new Schema({
   items: [
     {
       type: Schema.Types.ObjectId,
-      ref: "cart",
+      ref: "Food",
     },
   ],
   totalAmount: {

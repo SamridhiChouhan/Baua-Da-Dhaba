@@ -167,6 +167,7 @@ app.get("/checkout", async (req, res) => {
   let user = await User.findOne({ email: "user1@" });
   let cart = await Cart.findOne({ user: user._id }).populate("cart.food");
   // console.log(cart);
+  let foodIds = cart.cart.map((item) => item.food._id);
   let userCart = cart.user;
   let foodCart = cart.cart;
   let totalAmount = 0;
@@ -179,7 +180,7 @@ app.get("/checkout", async (req, res) => {
 
   let order = new Order({
     user: cart.user,
-    items: cart.cart,
+    items: foodIds,
     totalAmount: totalAmount,
   });
 
@@ -253,6 +254,38 @@ app.delete("/admin/delete/:id", async (req, res) => {
   let food = await Food.findOneAndDelete({ _id: id });
   console.log(food);
   res.redirect("/admin");
+});
+
+// order list
+app.get("/admin/orders", async (req, res) => {
+  let orders = await Order.find({}).populate("items");
+  console.log(orders);
+
+  res.render("order", { orders });
+});
+
+// render edit order status form
+app.get("/admin/order/edit/:id", async (req, res) => {
+  let { id } = req.params;
+  let order = await Order.findById(id).populate("items");
+  // let items = order.items;
+  console.log(order);
+  res.render("orderStatus", { order });
+});
+
+// Edit order status
+app.patch("/admin/order/edit/:id", async (req, res) => {
+  let { status } = req.body;
+  let { id } = req.params;
+  let order = await Order.findOneAndUpdate(
+    { _id: id },
+    {
+      status: status,
+    }
+  );
+  // let items = order.items;
+  console.log(order);
+  res.redirect("/admin/orders");
 });
 
 app.listen(port, () => {

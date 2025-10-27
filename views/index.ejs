@@ -1,5 +1,69 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+  .dosa{
+    padding: 0 5vw;
+    height:40rem;
+    width: 100%;
+    display: flex;
+    background-image: url("/Dhaba bg.png");
+    background-size: cover;
+    /* background-color: black; */
+  }
+  .dosa div{
+    width: 50%;
+    /* background-color: pink; */
+    height: 100%;
+    /* scale: 0.6; */
+
+  }
+  .dosa-img{
+    background-image: url("/dosa\ plate.png");
+    background-size: cover;
+    scale: 0.6;
+    /* animation: rotate 2s ease-in; */
+    /* animation-timeline: scroll(); */
+
+  }
+  .about-sec{
+    /* display: flex; */
+  }
+  .about-text{
+    height: 60vh;
+    width: 100%;
+    background-color: black;
+  }
+  .about-bg{
+    height: 25vh;
+    width: 100%;
+    background-image: url("/wave Dhaba.png");
+    background-size: cover;
+  }
+
+  @keyframes rotate {
+    from{
+      transform: none;
+      scale: 0.8;
+
+    }
+    to{
+      transform: rotate(360deg);
+      scale: 1;
+    }
+  }
+</style>
+
+<div class="dosa">
+  <div></div>
+  <div class="dosa-img"></div>
+</div>
+
+
+<div class="about-sec">
+  <div class="about-text"></div>
+  <div class="about-bg"></div>
+</div>
+
 <div class="Home-page row mt-5">
   <% for(let foodItem of foodList){ %>
   <div class="card m-3 p-2" style="width: 20rem">

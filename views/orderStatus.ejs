@@ -1,0 +1,44 @@
+<% layout("/layouts/adminPanel") %>
+
+<div class="card mt-3 mb-3 p-2" style="max-width: 900px">
+  <div class="row g-0 d-flex align-items-center">
+    <div>
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <!-- <p class="card-text"></p>
+          <p class="card-text"></p>
+          <p class="card-text">
+            <small class="text-muted"></small>
+          </p> -->
+        <% for(item of order.items) {%>
+        <ol>
+          <li>
+            <p class="card-text"><%=item.title %></p>
+          </li>
+        </ol>
+
+        <% } %>
+        <p class="card-text">Rs. <%=order.totalAmount %></p>
+        <p class="card-text">
+          <small class="text-muted"> Status - <%=order.status %></small><br />
+          <small class="text-muted"
+            >Order time - <%= order.orderDate.toString().slice(16,25) %>
+          </small>
+        </p>
+        <br /><br />
+        <form
+          action="/admin/order/edit/<%=order._id%>?_method=PATCH"
+          method="post"
+        >
+          Change status
+          <select name="status">
+            <option value="Pending"  <%= order.status === "Pending"  ? "selected" : "" %>>Pending</option>
+            <option value="Preparing" <%= order.status === "Preparing"  ? "selected" : "" %>>Preparing</option>
+            <option value="Delivered" <%= order.status === "Delivered"  ? "selected" : "" %>>Delivered</option>
+          </select>
+          <button>Done</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

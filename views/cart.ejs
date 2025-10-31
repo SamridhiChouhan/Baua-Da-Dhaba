@@ -1,17 +1,72 @@
-<% layout("/layouts/boilerplate") %> <a href="/orderhistory">See past orders</a
-><br />
-email :
-<p><%= userCart.email %></p>
-items : <% for (let cartItem of foodCart) { %>
-<li>
-  <%= cartItem.food.title %> – Quantity: <%= cartItem.quantity %> Rs. <%=
-  cartItem.food.price %>
-  <form action="/cart/<%= cartItem._id %>?_method=DELETE" method="post">
-    <button type="submit">Remove</button>
-  </form>
-</li>
-<% } %> Grand Total : <%= totalAmount %> <br />
-<a href="/">Add more</a><br />
-<br />
+<% layout("/layouts/boilerplate") %>
 
-<a href="/checkout" class="btn btn-primary">Pay</a>
+<style>
+  .cart-box {
+    /* background-color: pink; */
+    width: max-content;
+    border: 1px solid grey;
+    border-radius: 1rem;
+  }
+  .cartitem-info {
+    width: 60%;
+  }
+  .cartitem-img {
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+  .intro-text h5 {
+    font-size: 1rem;
+  }
+</style>
+
+<div class="cart-page px-5">
+  <a class="btn btn-secondary my-3 btn-sm" href="/orderhistory"
+    >See past orders</a
+  >
+  <a href="/" class="btn btn-secondary btn-sm">Add more</a>
+
+  <div class="cart-box p-3 mb-3">
+    <div class="cart-intro d-flex align-items-center border-bottom my-2 pb-3">
+      <div class="intro-icon">
+        <i class="fa-solid fa-clock" style="color: #198754"></i>
+      </div>
+      <div class="intro-text px-3">
+        <H5 class="m-0">Delivered in less than 30 minutes</H5>
+        <small class="text-muted">Shipment of items</small>
+      </div>
+    </div>
+    <div class="cart-info py-2">
+      <% for (let cartItem of foodCart) { %>
+      <div
+        class="cart-item p-2 d-flex align-items-center justify-content-between"
+      >
+        <img src="<%=cartItem.food.image.url%>" alt="" class="cartitem-img" />
+        <div class="cartitem-info px-2">
+          <h6 class="m-0"><%= cartItem.food.title %></h6>
+          <small class="text-muted">Quantity: <%= cartItem.quantity %></small>
+        </div>
+        <div class="cartitem-price">
+          <p class="m-0">Rs. <%= cartItem.food.price %>.00</p>
+          <form action="/cart/<%= cartItem._id %>?_method=DELETE" method="post">
+            <button type="submit" class="btn p-0">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <div class="border-top py-2 text-end">
+      <p class="m-0">Total Amount : <%= totalAmount %>.00</p>
+      <p class="m-0">+ GST 18% : <%= (totalAmount * 0.18).toFixed(2) %></p>
+      <h6 class="mt-3 py-1 border-top">
+        Grand Total : <%= ((totalAmount) + parseFloat((totalAmount *
+        0.18).toFixed(2))).toFixed(2) %>
+      </h6>
+      <a href="/checkout" class="btn btn-success">Pay</a>
+    </div>
+  </div>
+</div>

@@ -107,6 +107,11 @@ app.get("/", async (req, res) => {
   res.render("index", { foodList });
 });
 
+app.get("/menu", async (req, res) => {
+  const foodList = await Food.find({});
+  res.render("menu", { foodList });
+});
+
 // show cart
 app.get("/cart", async (req, res) => {
   let user = await User.findOne({ email: "user1@" });
@@ -145,7 +150,8 @@ app.post("/cart/add/:id", async (req, res) => {
 
   await cart.save();
   console.log(cart);
-  res.redirect("/");
+  // res.json({ success: true });
+  // res.redirect("/#menu-index");
 });
 
 // cart item delete
@@ -165,14 +171,39 @@ app.delete("/cart/:id", async (req, res) => {
 // Order checkout
 app.get("/checkout", async (req, res) => {
   let user = await User.findOne({ email: "user1@" });
+  let cart = await Cart.findOne({ user: user._id })
+    .populate("user")
+    .populate("cart.food");
+
+  let foodCart = cart.cart;
+  let totalAmount = 0;
+
+  for (item of foodCart) {
+    // console.log(item.price);
+    totalAmount += Number(item.food.price);
+  }
+  res.render("checkout", { totalAmount });
+});
+
+// Order confirmation
+app.post("/ordersuccess", async (req, res) => {
+  let { address } = req.body;
+  // console.log(address);
+  // let user = await User.findOne({ email: "user1@" });
+  let user = await User.findOne({ email: "user1@" });
+
+  user.address.push(address);
+  let updatedUser = await user.save();
+
+  // console.log(updatedUser);
   let cart = await Cart.findOne({ user: user._id }).populate("cart.food");
   // console.log(cart);
   let foodIds = cart.cart.map((item) => item.food._id);
   let userCart = cart.user;
   let foodCart = cart.cart;
   let totalAmount = 0;
-  console.log(foodCart);
-  console.log(totalAmount);
+  // console.log(foodCart);
+  // console.log(totalAmount);
 
   for (item of foodCart) {
     totalAmount += Number(item.food.price);
@@ -188,20 +219,15 @@ app.get("/checkout", async (req, res) => {
 
   cart.cart = [];
   await cart.save();
-  console.log(order);
-  res.render("checkout");
-});
+  // console.log(order);
 
-// Order confirmation
-app.post("/ordersuccess", async (req, res) => {
-  let user = await User.findOne({ email: "user1@" });
   res.render("orderSuccess");
 });
 
 // Order history
 app.get("/orderhistory", async (req, res) => {
   let user = await User.findOne({ email: "user1@" });
-  let orders = await Order.find({ user: user._id });
+  let orders = await Order.find({ user: user._id }).populate("items");
   console.log(orders);
   res.render("orderhistory", { orders });
 });

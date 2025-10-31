@@ -1,85 +1,71 @@
 <% layout("/layouts/boilerplate") %>
 
-<style>
-  .dosa{
-    padding: 0 5vw;
-    height:40rem;
-    width: 100%;
-    display: flex;
-    background-image: url("/Dhaba bg.png");
-    background-size: cover;
-    /* background-color: black; */
-  }
-  .dosa div{
-    width: 50%;
-    /* background-color: pink; */
-    height: 100%;
-    /* scale: 0.6; */
 
-  }
-  .dosa-img{
-    background-image: url("/dosa\ plate.png");
-    background-size: cover;
-    scale: 0.6;
-    /* animation: rotate 2s ease-in; */
-    /* animation-timeline: scroll(); */
-
-  }
-  .about-sec{
-    /* display: flex; */
-  }
-  .about-text{
-    height: 60vh;
-    width: 100%;
-    background-color: black;
-  }
-  .about-bg{
-    height: 25vh;
-    width: 100%;
-    background-image: url("/wave Dhaba.png");
-    background-size: cover;
-  }
-
-  @keyframes rotate {
-    from{
-      transform: none;
-      scale: 0.8;
-
-    }
-    to{
-      transform: rotate(360deg);
-      scale: 1;
-    }
-  }
-</style>
-
-<div class="dosa">
-  <div></div>
-  <div class="dosa-img"></div>
+<div class="hero-sec">
+  <div class="hero-info">
+    <h3>Take a taste <br> Come join Us</h3>
+    <h5>Life is so endlessly delicious.</h5>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem inventore quidem aliquid aliquam veniam ducimus debitis suscipit sequi sit. Similique corrupti numquam quia illum, voluptates cupiditate minima sed ullam quos?</p>
+    <a class="btn btn-secondary btn-hero" href="/menu">Explore Now</a>
+  </div>
+  <div class="hero-img">
+    <div class="h-img-big"></div>
+    <div class="h-img-small"></div>
+  </div>
 </div>
 
 
 <div class="about-sec">
-  <div class="about-text"></div>
+  <div class="about-text">
+        <h4 class="mb-5">Made with Love & Spice</h4>
+        <h5 class="mb-3">Where every bite feels like home!</h5>
+        <p >At Baua Da Dhabaa, we blend the nostalgia of roadside dhaba flavors with the ease of modern food delivery. From sizzling curries to buttery naan, every dish is cooked with desi love and a dash of spice that keeps you coming back for more.</p>
+        <a href="" class="mt-3 btn  btn-outline-light">About Us</a>
+      </div>
   <div class="about-bg"></div>
 </div>
 
-<div class="Home-page row mt-5">
+<div class="menu-page row mt-5" id="menu-index">
+  <h3>Our Menu</h3>
   <% for(let foodItem of foodList){ %>
-  <div class="card m-3 p-2" style="width: 20rem">
+  <div class="card m-3 mb-5 p-2" style="width: 20rem">
     <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 15rem ;" />
     <div class="card-body py-1">
       <h5 class="card-title"><%= foodItem.title %></h5>
       <p class="card-text">
         <%= foodItem.description %>
         <p>&#8377;<%= foodItem.price %></p>
-        <form action="/cart/add/<%= foodItem._id %>" method="post">
+        <!-- <form action="/cart/add/<%= foodItem._id %>" method="post">
           <button class="btn btn-danger">Add</button>
-        </form>
+        </form> -->
         </p>
     </div>
-  </div>
+    
+       <button  onclick="addToCart('<%= foodItem._id %>')"  class="btn btn-danger mx-3">Add <i class="fa-solid fa-cart-shopping"></i></button>
+       </div>
   <% } %>
 </div>
 
+<div class="contact-sec">
+     <div class="contact-element"></div>
+     <div class="contact-text">
+        <h3>Have a question, craving, or feedback?</h3>
+        <p>Call us at +91 98765 43210 or message at support@bauadadhabaa.com — our team will respond faster than your order arrives!</p>
+        <a href="" class="btn btn-outline-light">Contact Us</a>
+     </div>
+     <div class="contact-img"></div>
+</div>
 
+
+<script>
+async function addToCart(id) {
+  const res = await fetch(`/cart/add/${id}`, {
+    method: "POST",
+  });
+  const data = await res.json();
+  if (data.success) {
+    alert("Item added to cart!");
+    // optionally update cart count on page here
+  }
+}
+</script>

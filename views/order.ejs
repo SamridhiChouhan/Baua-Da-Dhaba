@@ -1,26 +1,31 @@
 <% layout("/layouts/adminPanel") %>
 
-<div class="mt-5">
+<style>
+  .order-page .card {
+    border: none;
+    background-color: #f9f7f8;
+    box-shadow: 1px 1px 3px grey;
+  }
+</style>
+
+<div class="row mt-5 order-page">
   <% for(order of orders){ %>
-  <div class="card mt-3 mb-3 p-2" style="max-width: 900px">
+  <div class="card col-8 mt-3 mb-3 p-2" style="max-width: 900px">
     <div class="row g-0 d-flex align-items-center">
       <div>
         <div class="card-body">
-          <h5 class="card-title"></h5>
-          <!-- <p class="card-text"></p>
-          <p class="card-text"></p>
-          <p class="card-text">
-            <small class="text-muted"></small>
-          </p> -->
-          <% for(item of order.items) {%>
+          <h5 class="card-title fs-6">Order ID : <%= order._id %></h5>
+          <small class="text-muted">Items list: </small>
           <ol>
+            <% for(item of order.items) {%>
             <li>
               <p class="card-text"><%=item.title %></p>
             </li>
+            <% } %>
           </ol>
-
-          <% } %>
-          <p class="card-text">Rs. <%=order.totalAmount %></p>
+          <p class="card-text mt-5">
+            Total Amount : Rs. <%=order.totalAmount %>
+          </p>
           <p class="card-text">
             <small class="text-muted"> Status - <%=order.status %></small><br />
             <small class="text-muted"

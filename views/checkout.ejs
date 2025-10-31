@@ -1,8 +1,28 @@
 <% layout("/layouts/boilerplate") %>
-
-<form action="/ordersuccess" method="post">
-  <br />
-  Full Name: <input placeholder="" /> <br /><br />
-  Address : <input placeholder="" /><br /><br />
-  <button class="btn btn-success">Order</button>
-</form>
+<div class="row-5">
+  <form action="/ordersuccess" method="post" class="m-5">
+    <h4 class="col-lg-6">Cart Total : Rs. <%= totalAmount %>.00</h4>
+    <div class="mb-3 col-lg-5">
+      <label for="name" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        id="name"
+        placeholder="eg. Ram"
+      />
+    </div>
+    <div class="mb-3 col-lg-5">
+      <label for="address" class="form-label" name="address">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        placeholder="eg. Hno.45 near City palace , Jaipur"
+        ,
+        name="address"
+      />
+    </div>
+    <button class="btn btn-success">Order</button>
+  </form>
+</div>

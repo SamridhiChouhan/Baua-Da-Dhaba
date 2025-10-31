@@ -1,9 +1,39 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  .order-history-page .card {
+    border: none;
+    background-color: #f9f7f8;
+    box-shadow: 1px 1px 3px grey;
+  }
+  .order-title-s {
+    color: black !important;
+  }
+  .order-date-p p {
+    margin: 0 !important;
+  }
+</style>
 
-<h2>History</h2>
+<div class="order-history-page px-5 py-3">
+  <h4>History</h4>
 
-<ul>
-  <% for(order of orders) {%>
-  <li><%= order.totalAmount %></li>
-  <% } %>
-</ul>
+  <div>
+    <% for(order of orders) {%>
+    <div class="card m-3 p-3">
+      <h5 class="card-title fs-6">Order ID : <%=order._id%></h5>
+      <% for(orderitem of order.items){ %>
+      <small class="text-muted order-title-s"
+        ><%=orderitem.title%>&nbsp;&nbsp;&nbsp; Rs.<%=orderitem.price %></small
+      >
+      <% } %>
+      <p class="mt-3">Total Amount : Rs.<%= order.totalAmount %></p>
+      <div class="d-flex align-item-center justify-content-between">
+        <small class="text-muted">Order Status : <%=order.status %></small>
+        <div class="order-date-p">
+          <p>Date: <%= order.orderDate.toString().slice(0,15) %></p>
+          <p>Time: <%= order.orderDate.toString().slice(16,25) %></p>
+        </div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>

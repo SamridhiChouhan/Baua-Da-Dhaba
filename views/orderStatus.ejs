@@ -1,6 +1,20 @@
 <% layout("/layouts/adminPanel") %>
+<style>
+  .orderStatus-page{
+    background-image: url("/Dhaba white bg.png");
+    height: 100%;
+    
+  }
+  .orderStatus-page .card{
+    
+    border: none;
+    /* background-color: #f9f7f8; */
+    box-shadow: 1px 1px 3px grey;
+  }
+</style>
 
-<div class="card mt-3 mb-3 p-2" style="max-width: 900px">
+<div class="orderStatus-page p-5">
+<div class="card p-2" style="max-width: 900px">
   <div class="row g-0 d-flex align-items-center">
     <div>
       <div class="card-body">
@@ -10,15 +24,18 @@
           <p class="card-text">
             <small class="text-muted"></small>
           </p> -->
-        <% for(item of order.items) {%>
-        <ol>
-          <li>
-            <p class="card-text"><%=item.title %></p>
-          </li>
-        </ol>
-
-        <% } %>
-        <p class="card-text">Rs. <%=order.totalAmount %></p>
+        <small class="text-muted">Items list: </small>
+          <ol>
+            <% for(item of order.items) {%>
+            <li>
+              <p class="card-text"><%=item.title %></p>
+            </li>
+            <% } %>
+          </ol>
+        <p class="card-text ">
+            Total Amount : Rs. <%=order.totalAmount %>
+          </p>
+        
         <p class="card-text">
           <small class="text-muted"> Status - <%=order.status %></small><br />
           <small class="text-muted"
@@ -31,14 +48,15 @@
           method="post"
         >
           Change status
-          <select name="status">
+          <select name="status"  class="form-select" aria-label="Default select example">
             <option value="Pending"  <%= order.status === "Pending"  ? "selected" : "" %>>Pending</option>
             <option value="Preparing" <%= order.status === "Preparing"  ? "selected" : "" %>>Preparing</option>
             <option value="Delivered" <%= order.status === "Delivered"  ? "selected" : "" %>>Delivered</option>
           </select>
-          <button>Done</button>
+          <button class="btn btn-danger mt-3">Done</button>
         </form>
       </div>
     </div>
   </div>
+</div>
 </div>

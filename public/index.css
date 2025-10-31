@@ -4,9 +4,14 @@ body {
   min-height: 100vh;
 }
 
-.container {
+.content {
   flex: 1;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+/* index page-menu*/
 
 .row {
   justify-content: center;
@@ -20,4 +25,237 @@ body {
 
 .card p {
   margin-bottom: 0.5rem !important;
+}
+
+.card button {
+  width: max-content;
+}
+
+/* Hero-section */
+.hero-sec {
+  padding: 0 5vw;
+  height: 45rem;
+  width: 100%;
+  display: flex;
+  background-image: url("/Dhaba bg(1).png");
+  background-size: cover;
+}
+.hero-sec div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-info {
+  padding-left: 5rem;
+}
+
+.hero-info h3 {
+  font-weight: 800;
+  font-size: 2.1rem;
+}
+
+.hero-info h5 {
+  font-weight: 600;
+  font-size: large;
+}
+
+.hero-info p {
+  font-size: 0.95rem;
+}
+
+.h-img-big {
+  width: 32rem !important;
+  height: 32rem !important;
+  background-image: url("/naan.png");
+  background-size: cover;
+  position: relative;
+  top: 9rem;
+  left: 4rem;
+  flex-shrink: 0;
+  animation: clockwise 0.1s ease-in;
+  animation-timeline: scroll();
+}
+
+.h-img-small {
+  width: 16rem !important;
+  height: 16rem !important;
+  background-image: url("/curry.png");
+  background-size: cover;
+  flex-shrink: 0;
+  position: relative;
+  right: 2rem;
+  bottom: 6rem;
+  animation: anticlock 0.1s ease-in;
+  animation-timeline: scroll();
+}
+
+.btn-hero {
+  width: max-content;
+  border: none;
+  background: linear-gradient(45deg, #ff7b00, #ff4800);
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(255, 120, 0, 0.4);
+  transition: all 0.3s ease;
+}
+.btn-hero:hover {
+  transform: scale(1.05);
+}
+
+/* About-section */
+
+.about-text {
+  height: 30rem;
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 8rem;
+  text-align: center;
+}
+
+.about-text h4 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.about-text h5 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.about-text p {
+  font-size: 0.9;
+}
+.about-bg {
+  height: 25vh;
+  width: 100%;
+  background-image: url("/wave Dhaba.png");
+  background-size: cover;
+}
+
+/* Menu-page */
+.menu-page {
+  margin: 6rem 0 !important;
+}
+
+.menu-page h3 {
+  padding-left: 13vw;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* Contact-section */
+.contact-sec {
+  margin: 5rem 0;
+  height: 25rem;
+  background-color: rgb(78, 139, 78);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.contact-img {
+  height: 15rem;
+  width: 15rem;
+  background-image: url("/contact bowl.png");
+  background-size: cover;
+}
+.contact-element {
+  height: 10rem;
+  width: 10rem;
+  background-image: url("/red chilli.png");
+  background-size: cover;
+  position: relative;
+  top: 11rem;
+  right: 4rem;
+}
+.contact-text h3 {
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+/* footer */
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+  width: 100%;
+}
+
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info-socials i {
+  font-size: 1.2rem;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.f-info {
+  height: 8rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ededed;
+  /* position: absolute; */
+  /* bottom: 0; */
+}
+
+.f-info-links,
+.f-info-socials {
+  width: 100%;
+  text-align: center;
+}
+
+.f-info-links,
+.f-info-grand {
+  padding-top: 0.5rem;
+}
+
+/* navbar */
+.navbar {
+  background-color: #f9f7f8;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ff4800;
+  font-weight: 600;
+}
+
+.nav-login a {
+  margin-right: 0.7rem;
+  text-align: center;
+
+  width: 7rem;
+  padding: 0;
+  border: 3px solid #ff4800;
+  color: #ff4800;
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 0.3rem 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Animations */
+
+@keyframes clockwise {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes anticlock {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: none;
+  }
 }

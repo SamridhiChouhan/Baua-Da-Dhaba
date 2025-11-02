@@ -112,6 +112,13 @@ app.get("/menu", async (req, res) => {
   res.render("menu", { foodList });
 });
 
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
 // show cart
 app.get("/cart", async (req, res) => {
   let user = await User.findOne({ email: "user1@" });

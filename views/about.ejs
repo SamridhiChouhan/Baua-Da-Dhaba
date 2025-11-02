@@ -1,1 +1,211 @@
 <% layout("/layouts/boilerplate") %>
+
+<style>
+  .about-hero {
+    height: 85vh;
+    background-color: #f9f7f8;
+    /* background-color: black; */
+    /* color: white; */
+  }
+  .about-hero-img {
+    background-image: url("/momo dhaba.png");
+    /* background-color: antiquewhite; */
+    background-size: cover;
+    height: 25rem;
+    width: 25rem;
+    margin-top: 6rem !important;
+    animation: clockwise 0.01s ease-in;
+    animation-timeline: scroll();
+    position: relative;
+    /* right: 25rem; */
+    /* bottom: 2rem; */
+  }
+  .about-hero-text {
+    position: relative;
+    /* right: 10rem; */
+  }
+  .about-hero-inner {
+    background-image: url("/samosa dhaba.png");
+    /* background-color: pink; */
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    /* width: 50rem; */
+    transform: rotate(180deg);
+    position: relative;
+    opacity: 0;
+    /* top: 25rem; */
+    transition: all 0.3s ease-in-out 0.3s;
+  }
+
+  .about-hero-inner:hover {
+    opacity: 1;
+  }
+  .about-main-img {
+    background-image: url("/leaves dhaba .png");
+    background-size: cover;
+    height: 8rem;
+    width: 10rem;
+    position: relative;
+    right: 8rem;
+    /* bottom: 1.5rem; */
+    top: 9rem;
+  }
+
+  .about-main {
+    /* background-color: rgb(253, 162, 87); */
+    /* color: white; */
+    /* background-color: rgb(249, 121, 74); */
+    /* background-color: black; */
+  }
+
+  .about-main-head {
+    border: 0.5rem solid pink;
+    transform: rotate(-10deg);
+    border-radius: 2px;
+  }
+
+  .about-main-cooking {
+    height: 30rem;
+
+    width: 20rem;
+    background-image: url("cooking.jpg");
+    background-size: cover;
+    background-color: #f9f7f8;
+    transform: rotate(10deg);
+    /* border: 1rem solid pink; */
+  }
+
+  .about-element {
+    height: 15rem;
+    background-image: url("/grey wave.png");
+    background-size: cover;
+    /* background-color: rgb(249, 121, 74);
+     */
+    /* background-color: black; */
+  }
+
+  .about-services {
+    background-color: #f9f7f8;
+  }
+  .about-services .card {
+    border: none;
+  }
+
+  .about-services .card-icon {
+    background-color: #f9f7f8;
+    color: red;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+  }
+
+  .about-end {
+    /* background-color: black; */
+    background-color: rgb(250, 130, 87);
+    color: white;
+  }
+  @keyframes visible {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<div class="about-hero d-flex align-items-center justify-content-center px-5">
+  <div class="about-hero-img m-5 d-flex align-items-end">
+    <div class="about-hero-inner"></div>
+  </div>
+  <div class="about-hero-text d-flex flex-column align-items-center">
+    <h2 class="fs-1 mb-3">About <i>Baua Da Dhabaa</i></h2>
+    <p class="text-center">
+      -A homely food spot where authentic taste meets comfort
+    </p>
+    <a href="/menu" class="btn btn-outline-dark">Order Now</a>
+  </div>
+</div>
+
+<!-- about-boxes -->
+
+<div class="about-services d-flex justify-content-center p-2">
+  <div class="card m-3 mb-5 p-3" style="width: 20rem">
+    <div class="card-body py-1 d-flex flex-column align-items-center">
+      <div class="card-icon d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <h5 class="card-title fw-bold mt-2 mb-3">Fast Delivery</h5>
+      <p class="card-text text-center">
+        Get your meals delivered quickly and efficiently. We prioritize speed
+        without compromising on quality, ensuring your food arrives fresh and
+        hot.
+      </p>
+    </div>
+  </div>
+
+  <div class="card m-3 mb-5 p-3" style="width: 20rem">
+    <div class="card-body py-1 d-flex flex-column align-items-center">
+      <div class="card-icon d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <h5 class="card-title fw-bold mt-2 mb-3">Clean and Safe</h5>
+      <p class="card-text text-center">
+        Your health is our priority.We follow strict hygiene and safety
+        standards to ensure meals are peapeared and delivered with the atmost
+        care.
+      </p>
+    </div>
+  </div>
+
+  <div class="card m-3 mb-5 p-3" style="width: 20rem">
+    <div class="card-body py-1 d-flex flex-column align-items-center">
+      <div class="card-icon d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-leaf"></i>
+      </div>
+      <h5 class="card-title fw-bold mt-2 mb-3">Fresh Ingredients</h5>
+      <p class="card-text text-center">
+        We use only the freshest ingredients in all our dishes.Our commitment to
+        quality means every bite is packed with flavour and nutrition.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="about-element"></div>
+
+<div class="about-main d-flex align-items-center justify-content-center p-5">
+  <div class="about-main-head d-flex flex-column align-items-center me-5">
+    <div class="about-main-cooking"></div>
+    <!-- <h3 class="text-center fs-1">Our Story</h3> -->
+    <!-- <div class="about-main-img"></div> -->
+  </div>
+  <div class="about-main-text px-5" style="width: 40%">
+    <h3 class="fs-1">Our Story</h3>
+    <p>
+      “Baua Da Dhabaa” started with one simple idea — to bring the true desi
+      flavor of home-cooked food to everyone who misses it.
+      <br />
+      Our kitchen might be small, but our hearts are full of love and spices!
+      <br />
+      Every dish we serve carries a story — of homemade ghee, freshly crushed
+      masalas, and that warmth you only get from ghar ka khana.
+      <br />
+      Stop by, take a seat, and let Baua Da Dhabaa remind you of home. ❤️
+    </p>
+  </div>
+</div>
+
+<div class="about-end text-center mt-5 p-5">
+  <p class="px-5 pt-5 mt-5">
+    We believe that great food doesn’t need fancy ingredients, just a lot of
+    heart. From traditional curries and soft rotis to our signature chai,
+    everything here is made fresh with love.
+    <br />
+    Whether you’re craving a quick bite or a full meal, Baua Da Dhabaa brings
+    you the warmth of homemade food, served the way it should be — simple,
+    tasty, and full of flavor.
+  </p>
+  <small>Made with love, served with care</small>
+</div>

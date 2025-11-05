@@ -5,13 +5,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
-const Food = require("./models/food");
-const User = require("./models/user");
-const Cart = require("./models/cart");
-const Order = require("./models/order");
 const ExpressError = require("./utils/ExpressError.js");
-const wrapAsync = require("./utils/wrapAsync.js");
-const { validateFood, validateId } = require("./middleware.js");
+const session = require("express-session");
 
 const cartRouter = require("./routes/cart.js");
 const homeRouter = require("./routes/home.js");
@@ -36,6 +31,19 @@ main()
     console.log(res, "connection successfull");
   })
   .catch((err) => console.log(err));
+
+const sessioOptions = {
+  secret: "mysupersecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
+
+app.use(session(sessioOptions));
 
 app.use("/", homeRouter);
 app.use("/cart", cartRouter);

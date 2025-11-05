@@ -11,6 +11,8 @@ const Cart = require("./models/cart");
 const Order = require("./models/order");
 const ExpressError = require("./utils/ExpressError.js");
 const wrapAsync = require("./utils/wrapAsync.js");
+const { validateFood, validateId } = require("./middleware.js");
+const { foodValidationSchema } = require("./schema.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -33,73 +35,6 @@ main()
   })
   .catch((err) => console.log(err));
 
-const foodData = [
-  {
-    id: "F001",
-    title: "Margherita Pizza",
-    description:
-      "Classic pizza topped with mozzarella cheese, fresh basil, and tomato sauce.",
-    image: {
-      url: "https://images.unsplash.com/photo-1559054663-e8d23213f55c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-      filename: "margherita.jpg",
-    },
-    price: "299",
-    category: "Pizza",
-    available: true,
-  },
-  {
-    id: "F002",
-    title: "Veggie Burger",
-    description:
-      "Grilled vegetable patty with lettuce, tomato, and house special sauce.",
-    image: {
-      url: "https://images.unsplash.com/photo-1559054663-e8d23213f55c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-      filename: "veggie-burger.jpg",
-    },
-    price: "199",
-    category: "Burger",
-    available: true,
-  },
-  {
-    id: "F003",
-    title: "Chocolate Brownie",
-    description: "Rich chocolate brownie served with vanilla ice cream.",
-    image: {
-      url: "https://images.unsplash.com/photo-1559054663-e8d23213f55c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-      filename: "brownie.jpg",
-    },
-    price: "149",
-    category: "Dessert",
-    available: true,
-  },
-  {
-    id: "F004",
-    title: "Caesar Salad",
-    description:
-      "Fresh romaine lettuce tossed with Caesar dressing, croutons, and cheese.",
-    image: {
-      url: "https://images.unsplash.com/photo-1559054663-e8d23213f55c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-      filename: "caesar-salad.jpg",
-    },
-    price: "179",
-    category: "Salad",
-    available: true,
-  },
-  {
-    id: "F005",
-    title: "Grilled Chicken Sandwich",
-    description:
-      "Tender grilled chicken breast with cheese, lettuce, and mayo in toasted bread.",
-    image: {
-      url: "https://images.unsplash.com/photo-1559054663-e8d23213f55c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-      filename: "grilled-chicken.jpg",
-    },
-    price: "249",
-    category: "Sandwich",
-    available: true,
-  },
-];
-
 // show menu
 app.get("/", async (req, res) => {
   const foodList = await Food.find({});
@@ -118,6 +53,7 @@ app.get("/about", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
+
 // show cart
 app.get("/cart", async (req, res) => {
   let user = await User.findOne({ email: "user1@" });
@@ -141,11 +77,11 @@ app.get("/cart", async (req, res) => {
 // Add items in cart
 app.post(
   "/cart/add/:id",
+  validateId,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let food = await Food.findById(id);
     let user = await User.findOne({ email: "user1@" });
-    // console.log("user", user._id);
     let cart = await Cart.findOne({ user: user._id });
     console.log(cart);
 
@@ -158,14 +94,13 @@ app.post(
 
     await cart.save();
     console.log(cart);
-    // res.json({ success: true });
-    // res.redirect("/#menu-index");
   })
 );
 
 // cart item delete
 app.delete(
   "/cart/:id",
+  validateId,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     console.log(id);
@@ -202,22 +137,16 @@ app.post(
   "/ordersuccess",
   wrapAsync(async (req, res) => {
     let { address } = req.body;
-    // console.log(address);
-    // let user = await User.findOne({ email: "user1@" });
     let user = await User.findOne({ email: "user1@" });
 
     user.address.push(address);
     let updatedUser = await user.save();
 
-    // console.log(updatedUser);
     let cart = await Cart.findOne({ user: user._id }).populate("cart.food");
-    // console.log(cart);
     let foodIds = cart.cart.map((item) => item.food._id);
     let userCart = cart.user;
     let foodCart = cart.cart;
     let totalAmount = 0;
-    // console.log(foodCart);
-    // console.log(totalAmount);
 
     for (item of foodCart) {
       totalAmount += Number(item.food.price);
@@ -233,7 +162,6 @@ app.post(
 
     cart.cart = [];
     await cart.save();
-    // console.log(order);
 
     res.render("orderSuccess");
   })
@@ -262,6 +190,7 @@ app.get("/admin/add", async (req, res) => {
 // Add new Food
 app.post(
   "/admin/add",
+  validateFood,
   wrapAsync(async (req, res) => {
     let { title, description, image, price, category } = req.body;
     let newFood = new Food(req.body);
@@ -282,6 +211,7 @@ app.get("/admin/edit/:id", async (req, res) => {
 // edit food
 app.patch(
   "/admin/edit/:id",
+  validateFood,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let { title, description, image, price, category } = req.body;

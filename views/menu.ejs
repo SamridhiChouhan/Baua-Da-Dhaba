@@ -1,8 +1,9 @@
 <% layout("/layouts/boilerplate") %>
 <style>
+    .menu-page{
+      margin: 3rem 3rem !important;
+    }
     .menu-page h3{
-       /* margin-right: 5rem !important; */
-       /* padding-left: 10rem !important; */
        color: #69585a; 
     }
 </style>
@@ -13,16 +14,14 @@
     From spicy curries to sweet desserts — everything at <strong>Baua Da Dhabaa</strong> is cooked with love.
   </p>
   <% for(let foodItem of foodList){ %>
-  <div class="card m-3 mb-5 p-2" style="width: 20rem">
-    <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 15rem ;" />
+  <div class="card m-3 mb-5 p-2" style="width: 15rem">
+    <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 10rem ;" />
     <div class="card-body py-1">
       <h5 class="card-title"><%= foodItem.title %></h5>
       <p class="card-text">
-        <%= foodItem.description %>
+        
+        <!-- <%= foodItem.description %> -->
         <p>&#8377;<%= foodItem.price %></p>
-        <!-- <form action="/cart/add/<%= foodItem._id %>" method="post">
-          <button class="btn btn-danger">Add</button>
-        </form> -->
         </p>
     </div>
     

@@ -45,14 +45,19 @@
         <br /><br />
         <form
           action="/admin/order/edit/<%=order._id%>?_method=PATCH"
-          method="post"
+          method="post" class="needs-validation" novalidate
         >
-          Change status
-          <select name="status"  class="form-select" aria-label="Default select example" required>
+         <div>
+           <label for="status" class="form-label">Change Status</label>
+          <select name="status" id="status"  class="form-select" aria-label="Default select example" required>
             <option value="Pending"  <%= order.status === "Pending"  ? "selected" : "" %>>Pending</option>
             <option value="Preparing" <%= order.status === "Preparing"  ? "selected" : "" %>>Preparing</option>
             <option value="Delivered" <%= order.status === "Delivered"  ? "selected" : "" %>>Delivered</option>
           </select>
+          <div class="invalid-feedback">
+            Please select a valid status.
+          </div>
+          </div>
           <button class="btn btn-danger mt-3">Done</button>
         </form>
       </div>

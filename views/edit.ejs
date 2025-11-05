@@ -17,7 +17,12 @@
 
 <div class="row p-3 mx-5 edit-page">
   <h4 class="mb-3 mt-3">Edit food details</h4>
-  <form action="/admin/edit/<%=food._id%>?_method=PATCH" method="post">
+  <form
+    action="/admin/edit/<%=food._id%>?_method=PATCH"
+    method="post"
+    class="needs-validation"
+    novalidate
+  >
     <div class="mb-3 col-6">
       <label for="title" class="form-label">Food Title</label>
       <input
@@ -28,6 +33,7 @@
         value="<%=food.title%>"
         required
       />
+      <div class="invalid-feedback">Please enter a food title</div>
     </div>
     <div class="mb-3 col-6">
       <label for="description" class="form-label">Food Description</label>
@@ -53,6 +59,7 @@
         value="<%=food.image.url  %>"
         required
       />
+      <div class="invalid-feedback">Please enter a valid image url.</div>
     </div>
     <div class="mb-3 col-6">
       <label for="price" class="form-label">Food Price</label>
@@ -64,6 +71,7 @@
         value="<%=food.price %>"
         required
       />
+      <div class="invalid-feedback">Please enter a valid price.</div>
     </div>
     <div class="mb-3 col-6">
       <label for="category" class="form-label">Food Category</label>
@@ -75,6 +83,7 @@
         value="<%=food.category %>"
         required
       />
+      <div class="invalid-feedback">Please enter a valid category.</div>
     </div>
     <button class="btn btn-danger">Edit</button>
   </form>

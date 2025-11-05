@@ -1,6 +1,11 @@
 <% layout("/layouts/boilerplate") %>
 <div class="row-5">
-  <form action="/ordersuccess" method="post" class="m-5">
+  <form
+    action="/ordersuccess"
+    method="post"
+    class="m-5 needs-validation"
+    novalidate
+  >
     <h4 class="col-lg-6">Cart Total : Rs. <%= totalAmount %>.00</h4>
     <div class="mb-3 col-lg-5">
       <label for="name" class="form-label">Username</label>
@@ -12,6 +17,7 @@
         placeholder="eg. Ram"
         required
       />
+      <div class="invalid-feedback">Please enter a valid username.</div>
     </div>
     <div class="mb-3 col-lg-5">
       <label for="address" class="form-label" name="address">Address</label>
@@ -24,6 +30,7 @@
         name="address"
         required
       />
+      <div class="invalid-feedback">Please enter a valid address.</div>
     </div>
     <button class="btn btn-success">Order</button>
   </form>

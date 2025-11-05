@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const cartRouter = require("./routes/cart.js");
 const homeRouter = require("./routes/home.js");
@@ -44,6 +45,13 @@ const sessioOptions = {
 };
 
 app.use(session(sessioOptions));
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.use("/", homeRouter);
 app.use("/cart", cartRouter);

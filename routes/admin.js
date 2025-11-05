@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { validateFood, validateId } = require("../middleware.js");
-const ExpressError = require("../utils/ExpressError.js");
 const wrapAsync = require("../utils/wrapAsync.js");
-const User = require("../models/user.js");
-const Cart = require("../models/cart.js");
 const Food = require("../models/food.js");
 const Order = require("../models/order.js");
 
@@ -29,6 +26,7 @@ router.post(
     let newFood = new Food(req.body);
     await newFood.save();
     console.log(newFood);
+    req.flash("success", "New food-item added!");
     res.redirect("/admin");
   })
 );
@@ -37,6 +35,9 @@ router.post(
 router.get("/edit/:id", async (req, res) => {
   let { id } = req.params;
   let food = await Food.findById(id);
+  if (!food) {
+    req.flash("error", "Food doesn't exist with this id!");
+  }
   console.log(food);
   res.render("edit", { food });
 });

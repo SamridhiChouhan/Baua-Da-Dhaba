@@ -48,7 +48,7 @@
           method="post"
         >
           Change status
-          <select name="status"  class="form-select" aria-label="Default select example">
+          <select name="status"  class="form-select" aria-label="Default select example" required>
             <option value="Pending"  <%= order.status === "Pending"  ? "selected" : "" %>>Pending</option>
             <option value="Preparing" <%= order.status === "Preparing"  ? "selected" : "" %>>Preparing</option>
             <option value="Delivered" <%= order.status === "Delivered"  ? "selected" : "" %>>Delivered</option>

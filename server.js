@@ -9,9 +9,8 @@ const Food = require("./models/food");
 const User = require("./models/user");
 const Cart = require("./models/cart");
 const Order = require("./models/order");
-const { randomUUID } = require("crypto");
-const { Console } = require("console");
-const { ObjectId } = require("mongoose").Types;
+const ExpressError = require("./utils/ExpressError.js");
+const wrapAsync = require("./utils/wrapAsync.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -140,40 +139,46 @@ app.get("/cart", async (req, res) => {
 });
 
 // Add items in cart
-app.post("/cart/add/:id", async (req, res) => {
-  let { id } = req.params;
-  let food = await Food.findById(id);
-  let user = await User.findOne({ email: "user1@" });
-  // console.log("user", user._id);
-  let cart = await Cart.findOne({ user: user._id });
-  console.log(cart);
+app.post(
+  "/cart/add/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let food = await Food.findById(id);
+    let user = await User.findOne({ email: "user1@" });
+    // console.log("user", user._id);
+    let cart = await Cart.findOne({ user: user._id });
+    console.log(cart);
 
-  if (!cart) {
-    cart = new Cart({ user: user._id, cart: [] });
-  }
-  cart.cart.push({
-    food: food._id,
-  });
+    if (!cart) {
+      cart = new Cart({ user: user._id, cart: [] });
+    }
+    cart.cart.push({
+      food: food._id,
+    });
 
-  await cart.save();
-  console.log(cart);
-  // res.json({ success: true });
-  // res.redirect("/#menu-index");
-});
+    await cart.save();
+    console.log(cart);
+    // res.json({ success: true });
+    // res.redirect("/#menu-index");
+  })
+);
 
 // cart item delete
-app.delete("/cart/:id", async (req, res) => {
-  let { id } = req.params;
-  console.log(id);
-  let user = await User.findOne({ email: "user1@" });
-  console.log("user:", user);
-  let items = await Cart.findOneAndUpdate(
-    { user: user._id },
-    { $pull: { cart: { _id: id } } }
-  );
-  console.log("items:", items);
-  res.redirect("/cart");
-});
+app.delete(
+  "/cart/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    console.log(id);
+    let user = await User.findOne({ email: "user1@" });
+    console.log("user:", user);
+    let items = await Cart.findOneAndUpdate(
+      { user: user._id },
+      { $pull: { cart: { _id: id } } }
+    );
+    console.log("items:", items);
+    res.redirect("/cart");
+  })
+);
 
 // Order checkout
 app.get("/checkout", async (req, res) => {
@@ -193,43 +198,46 @@ app.get("/checkout", async (req, res) => {
 });
 
 // Order confirmation
-app.post("/ordersuccess", async (req, res) => {
-  let { address } = req.body;
-  // console.log(address);
-  // let user = await User.findOne({ email: "user1@" });
-  let user = await User.findOne({ email: "user1@" });
+app.post(
+  "/ordersuccess",
+  wrapAsync(async (req, res) => {
+    let { address } = req.body;
+    // console.log(address);
+    // let user = await User.findOne({ email: "user1@" });
+    let user = await User.findOne({ email: "user1@" });
 
-  user.address.push(address);
-  let updatedUser = await user.save();
+    user.address.push(address);
+    let updatedUser = await user.save();
 
-  // console.log(updatedUser);
-  let cart = await Cart.findOne({ user: user._id }).populate("cart.food");
-  // console.log(cart);
-  let foodIds = cart.cart.map((item) => item.food._id);
-  let userCart = cart.user;
-  let foodCart = cart.cart;
-  let totalAmount = 0;
-  // console.log(foodCart);
-  // console.log(totalAmount);
+    // console.log(updatedUser);
+    let cart = await Cart.findOne({ user: user._id }).populate("cart.food");
+    // console.log(cart);
+    let foodIds = cart.cart.map((item) => item.food._id);
+    let userCart = cart.user;
+    let foodCart = cart.cart;
+    let totalAmount = 0;
+    // console.log(foodCart);
+    // console.log(totalAmount);
 
-  for (item of foodCart) {
-    totalAmount += Number(item.food.price);
-  }
+    for (item of foodCart) {
+      totalAmount += Number(item.food.price);
+    }
 
-  let order = new Order({
-    user: cart.user,
-    items: foodIds,
-    totalAmount: totalAmount,
-  });
+    let order = new Order({
+      user: cart.user,
+      items: foodIds,
+      totalAmount: totalAmount,
+    });
 
-  await order.save();
+    await order.save();
 
-  cart.cart = [];
-  await cart.save();
-  // console.log(order);
+    cart.cart = [];
+    await cart.save();
+    // console.log(order);
 
-  res.render("orderSuccess");
-});
+    res.render("orderSuccess");
+  })
+);
 
 // Order history
 app.get("/orderhistory", async (req, res) => {
@@ -252,13 +260,16 @@ app.get("/admin/add", async (req, res) => {
 });
 
 // Add new Food
-app.post("/admin/add", async (req, res) => {
-  let { title, description, image, price, category } = req.body;
-  let newFood = new Food(req.body);
-  await newFood.save();
-  console.log(newFood);
-  res.redirect("/admin");
-});
+app.post(
+  "/admin/add",
+  wrapAsync(async (req, res) => {
+    let { title, description, image, price, category } = req.body;
+    let newFood = new Food(req.body);
+    await newFood.save();
+    console.log(newFood);
+    res.redirect("/admin");
+  })
+);
 
 // Render editFood form
 app.get("/admin/edit/:id", async (req, res) => {
@@ -269,25 +280,31 @@ app.get("/admin/edit/:id", async (req, res) => {
 });
 
 // edit food
-app.patch("/admin/edit/:id", async (req, res) => {
-  let { id } = req.params;
-  let { title, description, image, price, category } = req.body;
-  let food = await Food.findOneAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
-    }
-  );
-  res.redirect("/admin");
-});
+app.patch(
+  "/admin/edit/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let { title, description, image, price, category } = req.body;
+    let food = await Food.findOneAndUpdate(
+      { _id: id },
+      {
+        ...req.body,
+      }
+    );
+    res.redirect("/admin");
+  })
+);
 
 // Delete foodItem
-app.delete("/admin/delete/:id", async (req, res) => {
-  let { id } = req.params;
-  let food = await Food.findOneAndDelete({ _id: id });
-  console.log(food);
-  res.redirect("/admin");
-});
+app.delete(
+  "/admin/delete/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let food = await Food.findOneAndDelete({ _id: id });
+    console.log(food);
+    res.redirect("/admin");
+  })
+);
 
 // order list
 app.get("/admin/orders", async (req, res) => {
@@ -307,18 +324,31 @@ app.get("/admin/order/edit/:id", async (req, res) => {
 });
 
 // Edit order status
-app.patch("/admin/order/edit/:id", async (req, res) => {
-  let { status } = req.body;
-  let { id } = req.params;
-  let order = await Order.findOneAndUpdate(
-    { _id: id },
-    {
-      status: status,
-    }
-  );
-  // let items = order.items;
-  console.log(order);
-  res.redirect("/admin/orders");
+app.patch(
+  "/admin/order/edit/:id",
+  wrapAsync(async (req, res) => {
+    let { status } = req.body;
+    let { id } = req.params;
+    let order = await Order.findOneAndUpdate(
+      { _id: id },
+      {
+        status: status,
+      }
+    );
+    // let items = order.items;
+    console.log(order);
+    res.redirect("/admin/orders");
+  })
+);
+
+app.use((req, res, next) => {
+  next(new ExpressError(404, "Page not found"));
+});
+
+app.use((err, req, res, next) => {
+  let { statusCode = 500, message = "Something went wrong" } = err;
+  res.status(statusCode).render("error", { message });
+  // res.status(statusCode).send("error : ", message);
 });
 
 app.listen(port, () => {

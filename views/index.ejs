@@ -5,7 +5,9 @@
   <div class="hero-info">
     <h3>Take a taste <br> Come join Us</h3>
     <h5>Life is so endlessly delicious.</h5>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem inventore quidem aliquid aliquam veniam ducimus debitis suscipit sequi sit. Similique corrupti numquam quia illum, voluptates cupiditate minima sed ullam quos?</p>
+    <p>Freshly made, homestyle food that brings back memories of ghar ka khana.
+From spicy curries to buttery rotis, every dish at Baua Da Dhabaa is cooked with love and served with a smile. <br>
+Explore our most-loved dishes below and add your favorites to the cart!</p>
     <a class="btn btn-secondary btn-hero" href="/menu">Explore Now</a>
   </div>
   <div class="hero-img">
@@ -25,15 +27,15 @@
   <div class="about-bg"></div>
 </div>
 
-<div class="menu-section row mt-5" id="menu-index">
+<div class="menu-section row mt-5 " id="menu-index">
   <h3>Our Menu</h3>
   <% for(let foodItem of foodList){ %>
-  <div class="card m-3 mb-5 p-2" style="width: 20rem">
-    <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 15rem ;" />
+  <div class="card m-3 mb-5 p-2 " style="width: 15rem">
+    <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 10rem ;" />
     <div class="card-body py-1">
       <h5 class="card-title"><%= foodItem.title %></h5>
       <p class="card-text">
-        <%= foodItem.description %>
+        <!-- <%= foodItem.description %> -->
         <p>&#8377;<%= foodItem.price %></p>
         <!-- <form action="/cart/add/<%= foodItem._id %>" method="post">
           <button class="btn btn-danger">Add</button>
@@ -41,7 +43,7 @@
         </p>
     </div>
     
-       <button  onclick="addToCart('<%= foodItem._id %>')"  class="btn btn-danger mx-3">Add <i class="fa-solid fa-cart-shopping"></i></button>
+       <button  onclick="addToCart('<%= foodItem._id %>')"  class="btn btn-danger mx-3 add-cart">Add <i class="fa-solid fa-cart-shopping"></i></button>
        </div>
   <% } %>
 </div>
@@ -68,4 +70,15 @@ async function addToCart(id) {
     // optionally update cart count on page here
   }
 }
+
+// let addCartBtn = document.querySelectorAll(".add-cart");
+
+// for(btn of addCartBtn){
+// btn.addEventListener("click" , ()=>{
+//   console.log("clicked");
+//   btn.style.backgroundColor = "green";
+//   btn.style.innerText = "Added"
+// })}
+
+
 </script>

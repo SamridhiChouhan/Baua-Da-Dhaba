@@ -7,23 +7,25 @@ const foodSchema = new Schema({
   },
   title: {
     type: String,
+    required: true,
   },
   description: {
     type: String,
+    required: true,
   },
   image: {
     url: String,
     filename: String,
+    // required: true,
   },
   price: {
     type: String,
+    required: true,
   },
   category: {
     type: String,
     enum: [],
-  },
-  available: {
-    type: Boolean,
+    required: true,
   },
 });
 

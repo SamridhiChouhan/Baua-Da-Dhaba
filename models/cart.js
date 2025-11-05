@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const User = require("./user");
+const { required } = require("joi");
 const { Schema } = mongoose;
 
 const cartSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   cart: [
     {
@@ -15,6 +17,7 @@ const cartSchema = new Schema({
       food: {
         type: Schema.Types.ObjectId,
         ref: "Food",
+        required: true,
       },
       quantity: {
         type: Number,

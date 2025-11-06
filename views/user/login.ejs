@@ -1,12 +1,40 @@
-<% layout("/layouts/boilerplate") %> Login
+<% layout("/layouts/boilerplate") %>
 
-<form action="/user/login" method="post">
-  enter username :
-  <input type="text" name="username" />
-  <br />
-  enter password:
-  <input type="password" name="password" />
+<div class="m-3 row user-box">
+  <!-- <h3 class="text-center m-3">Login to Baua Da Dhabaa</h3> -->
+  <form
+    action="/user/login"
+    method="post"
+    class="col-5 card p-3 mt-3 needs-validation"
+    novalidate
+  >
+    <h3 class="text-center text-muted mb-3">
+      Login to <strong style="color: #ff4814">Baua Da Dhabaa</strong>
+    </h3>
 
-  <button>Login</button>
-  <a href="/user/signup">Dont have an account</a>
-</form>
+    <div class="mb-3">
+      <label for="username" class="form-label">Enter Username</label>
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        id="username"
+        required
+      />
+      <div class="invalid-feedback">Username is necessary.</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Enter password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="password"
+        required
+      />
+      <div class="invalid-feedback">Password is necessary.</div>
+    </div>
+    <button class="btn btn-success btn-user mb-2">Login</button>
+    <a href="/user/signup">Dont have an account</a>
+  </form>
+</div>

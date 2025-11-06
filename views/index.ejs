@@ -35,17 +35,15 @@ Explore our most-loved dishes below and add your favorites to the cart!</p>
     <div class="card-body py-1">
       <h5 class="card-title"><%= foodItem.title %></h5>
       <p class="card-text">
-        <!-- <%= foodItem.description %> -->
         <p>&#8377;<%= foodItem.price %></p>
-        <!-- <form action="/cart/add/<%= foodItem._id %>" method="post">
-          <button class="btn btn-danger">Add</button>
-        </form> -->
         </p>
     </div>
     
        <button  onclick="addToCart('<%= foodItem._id %>')"  class="btn btn-danger mx-3 add-cart">Add <i class="fa-solid fa-cart-shopping"></i></button>
        </div>
   <% } %>
+  <a id="cart-message"  href="/cart" class="btn btn-success p-2 px-3">
+   </a>
 </div>
 
 <div class="contact-sec">
@@ -58,35 +56,3 @@ Explore our most-loved dishes below and add your favorites to the cart!</p>
      <div class="contact-img"></div>
 </div>
 
-
-<script>
-async function addToCart(id) {
-  const res = await fetch(`/cart/add/${id}`, {
-    method: "POST",
-  });
-  const data = await res.json();
-  if (data.success) {
-     alert("Item added to cart!");
-    // optionally update cart count on page here
-  }
-  //  const data = await res.json();
-
-  // if the backend tells us to redirect, do it
-
-  // if (data.redirect) {
-  //   window.location.href = data.redirect;
-  // }
-
-}
-
-// let addCartBtn = document.querySelectorAll(".add-cart");
-
-// for(btn of addCartBtn){
-// btn.addEventListener("click" , ()=>{
-//   console.log("clicked");
-//   btn.style.backgroundColor = "green";
-//   btn.style.innerText = "Added"
-// })}
-
-
-</script>

@@ -50,7 +50,12 @@ router.post(
     });
 
     await cart.save();
-    req.flash("action", "Item added!");
+    return res.json({
+      success: true,
+      message: "Item added to cart",
+      cartCount: cart.cart.length,
+    });
+    // req.flash("action", "Item added!");
     // res.redirect("/");
     // res.json({ redirect: "/cart" }); // send redirect path
     console.log(cart);

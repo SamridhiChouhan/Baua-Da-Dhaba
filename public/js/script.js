@@ -1,3 +1,4 @@
+// for clientside-validation
 (() => {
   "use strict";
 
@@ -20,3 +21,18 @@
     );
   });
 })();
+
+// For view cart
+async function addToCart(id) {
+  const res = await fetch(`/cart/add/${id}`, {
+    method: "POST",
+  });
+  const data = await res.json();
+  if (data.success) {
+    const msg = document.getElementById("cart-message");
+    msg.style.display = "block";
+    msg.innerHTML = `View Cart <small>(${data.cartCount})</small>`;
+  } else {
+    alert("Failed to add item: " + data.message);
+  }
+}

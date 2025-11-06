@@ -28,19 +28,8 @@
        <button  onclick="addToCart('<%= foodItem._id %>')"  class="btn btn-danger mx-3">Add <i class="fa-solid fa-cart-shopping"></i></button>
        </div>
   <% } %>
+  <a id="cart-message"  href="/cart" class="btn btn-success p-2 px-3">
+   </a>
 </div>
 
 
-
-<script>
-async function addToCart(id) {
-  const res = await fetch(`/cart/add/${id}`, {
-    method: "POST",
-  });
-  const data = await res.json();
-  if (data.success) {
-    alert("Item added to cart!");
-    // optionally update cart count on page here
-  }
-}
-</script>

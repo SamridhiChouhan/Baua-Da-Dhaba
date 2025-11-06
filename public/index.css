@@ -146,6 +146,14 @@ html {
   font-weight: 700;
 }
 
+#cart-message {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  width: max-content;
+  z-index: 999;
+}
+
 /* Contact-section */
 .contact-sec {
   margin: 5rem 0;
@@ -239,6 +247,17 @@ html {
   font-weight: 600;
   padding: 0.3rem 1rem;
   transition: all 0.3s ease;
+}
+
+/* user-login,signup */
+
+.user-box form {
+  /* border: none; */
+  box-shadow: 2px 2px 5px grey;
+}
+.btn-user {
+  background-color: #ff4814;
+  border: none;
 }
 
 /* Animations */

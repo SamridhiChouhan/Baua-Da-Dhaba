@@ -4,6 +4,7 @@ const { validateFood, validateId } = require("../middleware.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const Food = require("../models/food.js");
 const Order = require("../models/order.js");
+const ExpressError = require("../utils/ExpressError.js");
 
 //show Admin dashboard
 router.get("/", async (req, res) => {
@@ -36,7 +37,7 @@ router.get("/edit/:id", async (req, res) => {
   let { id } = req.params;
   let food = await Food.findById(id);
   if (!food) {
-    req.flash("error", "Food doesn't exist with this id!");
+    throw new ExpressError(404, "Food doesn't exist with this id!");
   }
   console.log(food);
   res.render("edit", { food });

@@ -8,6 +8,10 @@ const mongoose = require("mongoose");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const User = require("./models/user.js");
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 const cartRouter = require("./routes/cart.js");
 const homeRouter = require("./routes/home.js");
@@ -47,9 +51,18 @@ const sessioOptions = {
 app.use(session(sessioOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.action = req.flash("action");
+  res.locals.currUser = req.user || null;
   next();
 });
 
@@ -58,13 +71,61 @@ app.use("/cart", cartRouter);
 app.use("/order", orderRouter);
 app.use("/admin", adminRouter);
 
+app.get("/user/signup", (req, res) => {
+  res.render("user/signup");
+});
+
+app.post("/user/signup", async (req, res) => {
+  try {
+    let { username, email, role, password } = req.body;
+    const newUser = new User({ email, username, role });
+    const registeredUser = await User.register(newUser, password);
+    req.logIn(registeredUser, (err) => {
+      if (err) {
+        next(err);
+      }
+      req.flash("success", "Welcome to Baua Da Dhabaa!");
+      res.redirect("/");
+    });
+  } catch (error) {
+    req.flash("error", error.message);
+    res.redirect("/user/signup");
+  }
+});
+
+app.get("/user/login", (req, res) => {
+  res.render("user/login");
+});
+
+app.post(
+  "/user/login",
+  passport.authenticate("local", {
+    failureRedirect: "/user/login",
+    failureFlash: true,
+  }),
+  async (req, res) => {
+    req.flash("success", "Welcome to Baua Da Dhabaa! You are Logged in!");
+    res.redirect("/");
+  }
+);
+
+app.get("/user/logout", async (req, res) => {
+  req.logOut((err) => {
+    if (err) {
+      next(err);
+    }
+    req.flash("success", "You are logged out!");
+    res.redirect("/");
+  });
+});
+
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page not found"));
 });
 
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong" } = err;
-  res.status(statusCode).render("error", { message });
+  res.status(statusCode).render("./extra/error", { message });
 });
 
 app.listen(port, () => {

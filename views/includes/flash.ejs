@@ -9,11 +9,19 @@
     width: 50%; /* you can tweak this */
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }  */
+  .alert {
+    position: fixed;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  .alert-action {
+    /* position: fixed; */
+    /* top: 20rem; */
+  }
 </style>
 
 <% if (success && success.length){ %>
 <div
-  class="alert alert-success alert-dismissible fade show col-8 offset-2"
+  class="alert alert-success alert-dismissible fade show col-8 offset-2 mt-3"
   role="alert"
 >
   <%= success %>
@@ -26,10 +34,23 @@
 </div>
 <% } %> <% if (error && error.length){ %>
 <div
-  class="alert alert-danger alert-dismissible fade show col-8 offset-2"
+  class="alert alert-danger alert-dismissible fade show col-8 offset-2 mt-3"
   role="alert"
 >
   <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %> <% if (action && action.length){ %>
+<div
+  class="alert alert-action alert-danger alert-dismissible fade show col-8 offset-2 mt-3"
+  role="alert"
+>
+  <%= action %>
   <button
     type="button"
     class="btn-close"

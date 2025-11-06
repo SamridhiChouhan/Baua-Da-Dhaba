@@ -23,6 +23,10 @@ router.get("/", async (req, res) => {
     totalAmount += Number(item.food.price);
   }
 
+  if (foodCart.length === 0) {
+    req.flash("error", "Cart is empty!");
+  }
+
   // console.log(cart.cart);
   res.render("cart", { cart, userCart, foodCart, totalAmount });
 });
@@ -46,6 +50,9 @@ router.post(
     });
 
     await cart.save();
+    req.flash("action", "Item added!");
+    // res.redirect("/");
+    // res.json({ redirect: "/cart" }); // send redirect path
     console.log(cart);
   })
 );

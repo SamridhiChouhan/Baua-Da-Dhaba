@@ -29,9 +29,16 @@
     </div>
     <div>
       <ul class="navbar-nav">
+        <% if(!currUser) {%>
         <div class="nav-item nav-login ">
-          <a href="" class="nav-link">Login</a>
+          <a href="/user/login" class="nav-link">Login</a>
         </div>
+        <% } %> 
+        <% if(currUser){ %>
+          <div class="nav-item nav-login ">
+          <a href="/user/logout" class="nav-link">Log-out</a>
+        </div>
+          <% } %>
         <div class="nav-item">
           <a href="/cart" class="nav-link"
             ><i class="fa-solid fa-cart-shopping"></i

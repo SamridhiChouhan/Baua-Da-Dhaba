@@ -10,7 +10,7 @@ const Order = require("../models/order.js");
 
 // Order checkout
 router.get("/checkout", async (req, res) => {
-  let user = await User.findOne({ email: "user1@" });
+  let user = await User.findOne({ email: req.user.email });
   let cart = await Cart.findOne({ user: user._id })
     .populate("user")
     .populate("cart.food");
@@ -30,7 +30,7 @@ router.post(
   "/ordersuccess",
   wrapAsync(async (req, res) => {
     let { address } = req.body;
-    let user = await User.findOne({ email: "user1@" });
+    let user = await User.findOne({ email: req.user.email });
 
     user.address.push(address);
     let updatedUser = await user.save();
@@ -62,7 +62,7 @@ router.post(
 
 // Order history
 router.get("/orderhistory", async (req, res) => {
-  let user = await User.findOne({ email: "user1@" });
+  let user = await User.findOne({ email: req.user.email });
   let orders = await Order.find({ user: user._id }).populate("items");
   console.log(orders);
   res.render("orderhistory", { orders });

@@ -9,7 +9,7 @@ const Food = require("../models/food.js");
 
 // show cart
 router.get("/", async (req, res) => {
-  let user = await User.findOne({ email: "user1@" });
+  let user = await User.findOne({ email: req.user.email });
   let cart = await Cart.findOne({ user: user._id })
     .populate("user")
     .populate("cart.food");
@@ -23,10 +23,6 @@ router.get("/", async (req, res) => {
     totalAmount += Number(item.food.price);
   }
 
-  if (foodCart.length === 0) {
-    req.flash("error", "Cart is empty!");
-  }
-
   // console.log(cart.cart);
   res.render("cart", { cart, userCart, foodCart, totalAmount });
 });
@@ -38,7 +34,7 @@ router.post(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let food = await Food.findById(id);
-    let user = await User.findOne({ email: "user1@" });
+    let user = await User.findOne({ email: req.user.email });
     let cart = await Cart.findOne({ user: user._id });
     console.log(cart);
 
@@ -69,7 +65,7 @@ router.delete(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     console.log(id);
-    let user = await User.findOne({ email: "user1@" });
+    let user = await User.findOne({ email: req.user.email });
     console.log("user:", user);
     let items = await Cart.findOneAndUpdate(
       { user: user._id },

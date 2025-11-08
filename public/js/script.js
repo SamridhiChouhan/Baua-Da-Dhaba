@@ -33,6 +33,11 @@ async function addToCart(id) {
     msg.style.display = "block";
     msg.innerHTML = `View Cart <small>(${data.cartCount})</small>`;
   } else {
-    alert("Failed to add item: " + data.message);
+    const msg = document.getElementById("cart-message");
+    msg.style.display = "block";
+    msg.innerHTML = `${data.message}`;
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 3000);
   }
 }

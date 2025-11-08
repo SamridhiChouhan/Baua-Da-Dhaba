@@ -16,6 +16,7 @@
         id="name"
         placeholder="eg. Ram"
         required
+        value="<%=user.username  %>"
       />
       <div class="invalid-feedback">Please enter a valid username.</div>
     </div>
@@ -29,6 +30,7 @@
         ,
         name="address"
         required
+        value="<%=user.address[0]%>"
       />
       <div class="invalid-feedback">Please enter a valid address.</div>
     </div>

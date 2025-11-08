@@ -1,15 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { validateFood, validateId } = require("../middleware.js");
+const { validateFood, validateId, isLoggedIn } = require("../middleware.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const Food = require("../models/food.js");
 const Order = require("../models/order.js");
 const ExpressError = require("../utils/ExpressError.js");
+const User = require("../models/user.js");
 
 //show Admin dashboard
-router.get("/", async (req, res) => {
+router.get("/", isLoggedIn, async (req, res) => {
   let foodList = await Food.find({});
   // console.log(foodList);
+  if (req.user.role != "Staff" && req.user.role != "Admin") {
+    req.flash("error", `You don't have access to this page`);
+    return res.redirect("/");
+  }
+  // console.log(req.user.role);
+  req.flash("success", `${req.user.username} logged in!!`);
   res.render("adminDashboard", { foodList });
 });
 
@@ -56,6 +63,7 @@ router.patch(
         ...req.body,
       }
     );
+    req.flash("success", `${title} edited successfully!`);
     res.redirect("/admin");
   })
 );
@@ -67,9 +75,42 @@ router.delete(
     let { id } = req.params;
     let food = await Food.findOneAndDelete({ _id: id });
     console.log(food);
+    req.flash("success", `${food.title} deleted successfully!`);
     res.redirect("/admin");
   })
 );
+
+// to add staffform
+router.get("/staff", async (req, res) => {
+  if (req.user.role != "Admin") {
+    req.flash("error", "Only Admin have access to this page!");
+    console.log(req.user.role);
+    return res.redirect("/admin");
+  }
+  res.render("staff");
+});
+
+// cHange role
+router.post("/staff", async (req, res) => {
+  let { email, username, role } = req.body;
+  let user = await User.findOneAndUpdate(
+    { username: username },
+    { role: role }
+  );
+  if (!user) {
+    req.flash("error", "No user found with this username. Login first!!");
+    return res.redirect("/user/login");
+  }
+
+  req.flash("success", `${username} role is changed to ${role}`);
+  res.redirect("/admin");
+});
+
+// show staff
+router.get("/staffView", async (req, res) => {
+  let users = await User.find({ role: "Staff" });
+  res.render("staffView", { users });
+});
 
 // order list
 router.get("/orders", async (req, res) => {

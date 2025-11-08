@@ -1,0 +1,49 @@
+<% layout("/layouts/adminPanel") %>
+
+<div class="row p-3">
+  <h3 class="col-8">Change Staff Role:</h3>
+  <div class="card col-8 p-3">
+    <form action="/admin/staff" method="post">
+      <div class="mb-3">
+        <label for="username" class="form-label">Enter Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid username</div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Enter email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid email</div>
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Change Status</label>
+        <select
+          name="role"
+          id="role"
+          class="form-select"
+          aria-label="Default select example"
+          required
+        >
+          <option value="" disabled>Select role</option>
+          <option value="User">User</option>
+          <option value="Staff">Staff</option>
+          <option value="Admin">Admin</option>
+        </select>
+        <div class="invalid-feedback">Please select a valid Role.</div>
+      </div>
+
+      <button type="submit" class="btn btn-outline-success">Submit</button>
+    </form>
+  </div>
+</div>

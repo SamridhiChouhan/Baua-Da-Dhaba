@@ -6,10 +6,11 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const User = require("../models/user.js");
 const Cart = require("../models/cart.js");
 const Food = require("../models/food.js");
+const { isLoggedIn } = require("../middleware.js");
 
 // show cart
-router.get("/", async (req, res) => {
-  let user = await User.findOne({ email: req.user.email });
+router.get("/", isLoggedIn, async (req, res) => {
+  let user = await User.findOne({ _id: req.user._id });
   let cart = await Cart.findOne({ user: user._id })
     .populate("user")
     .populate("cart.food");
@@ -32,11 +33,23 @@ router.post(
   "/add/:id",
   validateId,
   wrapAsync(async (req, res) => {
+    if (!req.user) {
+      return res.json({
+        success: false,
+        message: "Please login to add items to your cart.",
+      });
+    }
     let { id } = req.params;
     let food = await Food.findById(id);
-    let user = await User.findOne({ email: req.user.email });
+    let user = await User.findOne({ _id: req.user._id });
     let cart = await Cart.findOne({ user: user._id });
     console.log(cart);
+    if (!food) {
+      return res.json({
+        success: false,
+        message: "FoodItem doesn't exists!",
+      });
+    }
 
     if (!cart) {
       cart = new Cart({ user: user._id, cart: [] });
@@ -65,7 +78,7 @@ router.delete(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     console.log(id);
-    let user = await User.findOne({ email: req.user.email });
+    let user = await User.findOne({ _id: req.user._id });
     console.log("user:", user);
     let items = await Cart.findOneAndUpdate(
       { user: user._id },

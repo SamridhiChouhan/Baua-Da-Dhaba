@@ -1,0 +1,20 @@
+<% layout("/layouts/adminPanel") %>
+
+<div class="m-3 mx-5">
+  <h4>Staff members</h4>
+  <% for(user of users) {%>
+  <div class="card m-2 p-2 d-flex">
+    <div class="row g-0 d-flex align-items-center">
+      <div class="col-md-9">
+        <div class="card-body">
+          <p><%= user.username %></p>
+          <small class="text-muted"><%=user.email %></small>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <a href="/admin/staff" class="btn btn-secondary">Change Role</a>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>

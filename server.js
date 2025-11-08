@@ -17,6 +17,7 @@ const cartRouter = require("./routes/cart.js");
 const homeRouter = require("./routes/home.js");
 const orderRouter = require("./routes/order.js");
 const adminRouter = require("./routes/admin.js");
+const userRouter = require("./routes/user.js");
 
 app.engine("ejs", ejsMate);
 // app.use(express.static("views"));
@@ -70,54 +71,7 @@ app.use("/", homeRouter);
 app.use("/cart", cartRouter);
 app.use("/order", orderRouter);
 app.use("/admin", adminRouter);
-
-app.get("/user/signup", (req, res) => {
-  res.render("user/signup");
-});
-
-app.post("/user/signup", async (req, res) => {
-  try {
-    let { username, email, role, password } = req.body;
-    const newUser = new User({ email, username, role });
-    const registeredUser = await User.register(newUser, password);
-    req.logIn(registeredUser, (err) => {
-      if (err) {
-        next(err);
-      }
-      req.flash("success", "Welcome to Baua Da Dhabaa!");
-      res.redirect("/");
-    });
-  } catch (error) {
-    req.flash("error", error.message);
-    res.redirect("/user/signup");
-  }
-});
-
-app.get("/user/login", (req, res) => {
-  res.render("user/login");
-});
-
-app.post(
-  "/user/login",
-  passport.authenticate("local", {
-    failureRedirect: "/user/login",
-    failureFlash: true,
-  }),
-  async (req, res) => {
-    req.flash("success", "Welcome to Baua Da Dhabaa! You are Logged in!");
-    res.redirect("/");
-  }
-);
-
-app.get("/user/logout", async (req, res) => {
-  req.logOut((err) => {
-    if (err) {
-      next(err);
-    }
-    req.flash("success", "You are logged out!");
-    res.redirect("/");
-  });
-});
+app.use("/user", userRouter);
 
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page not found"));

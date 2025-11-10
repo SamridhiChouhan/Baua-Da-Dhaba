@@ -3,7 +3,7 @@
 <!-- Isko na likhna css mai -->
 <style>
   .edit-page {
-    height: 100%;
+    height: 95vh;
     background-image: url("/Dhaba white bg.png");
   }
 
@@ -17,10 +17,17 @@
   }
 </style>
 
-<div class="row p-3 mx-5 edit-page">
-  <h4 class="mb-3 mt-3">Add new food</h4>
-  <form action="/admin/add" class="needs-validation" method="post" novalidate>
-    <div class="mb-3 col-6">
+<div class="row p-3 px-3 edit-page g-0">
+  <!-- <h4 class="mb-3 mt-3">Add new food</h4> -->
+  <form
+    action="/admin/add"
+    class="needs-validation col-lg-6"
+    method="post"
+    novalidate
+  >
+    <h4 class="mb-3 mt-3">Add new food</h4>
+
+    <div class="mb-3">
       <label for="title" class="form-label">Food Title</label>
       <input
         type="text"
@@ -33,7 +40,7 @@
       <div class="valid-feedback">Looks delicious!</div>
       <div class="invalid-feedback">Please enter a food title</div>
     </div>
-    <div class="mb-3 col-6">
+    <div class="mb-3">
       <label for="description" class="form-label">Food Description</label>
       <textarea
         type="text"
@@ -45,7 +52,7 @@
       >
       </textarea>
     </div>
-    <div class="mb-3 col-6">
+    <div class="mb-3">
       <label for="image[url]" class="form-label">Image url</label>
       <input
         type="text"
@@ -57,7 +64,7 @@
       <div class="invalid-feedback">Please enter valid image url.</div>
     </div>
 
-    <div class="mb-3 col-6">
+    <div class="mb-3">
       <label for="price" class="form-label">Food Price</label>
       <input
         type="number"
@@ -69,7 +76,7 @@
       />
       <div class="invalid-feedback">Please enter valid price.</div>
     </div>
-    <div class="mb-3 col-6">
+    <div class="mb-3">
       <label for="category" class="form-label">Food Category</label>
       <input
         type="text"

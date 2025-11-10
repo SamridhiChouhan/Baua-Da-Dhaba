@@ -14,10 +14,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
   }
-  .alert-action {
-    /* position: fixed; */
-    /* top: 20rem; */
-  }
 </style>
 
 <% if (success && success.length){ %>
@@ -39,19 +35,6 @@
   role="alert"
 >
   <%= error %>
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="alert"
-    aria-label="Close"
-  ></button>
-</div>
-<% } %> <% if (action && action.length){ %>
-<div
-  class="alert alert-action alert-danger alert-dismissible fade show col-8 offset-2 mt-3"
-  role="alert"
->
-  <%= action %>
   <button
     type="button"
     class="btn-close"

@@ -1,6 +1,6 @@
-
-
-<nav class="navbar normal-nav navbar-expand-lg bg-body-light sticky-top navbar-toggler-transition" px-2">
+<nav
+  class="navbar normal-nav navbar-expand-lg bg-body-light sticky-top navbar-toggler-transition px-2"
+>
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Baua Da Dhabaa</a>
     <button
@@ -27,22 +27,21 @@
         </li>
       </ul>
     </div>
-    <div>
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
         <% if(!currUser) {%>
-        <div class="nav-item nav-login ">
+        <div class="nav-item nav-login my-1">
           <a href="/user/login" class="nav-link">Login</a>
         </div>
-        <% } %> 
-        <% if(currUser){ %>
-          <div class="nav-item nav-login ">
+        <% } %> <% if(currUser){ %>
+        <div class="nav-item nav-login my-1">
           <a href="/user/logout" class="nav-link">Log-out</a>
         </div>
-          <% } %>
-          <div class="nav-item nav-login ">
+        <% } %>
+        <div class="nav-item nav-login my-1">
           <a href="/admin" class="nav-link">Admin</a>
         </div>
-        <div class="nav-item">
+        <div class="nav-item my-lg-1">
           <a href="/cart" class="nav-link"
             ><i class="fa-solid fa-cart-shopping"></i
           ></a>

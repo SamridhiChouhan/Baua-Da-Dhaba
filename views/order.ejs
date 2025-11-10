@@ -8,38 +8,32 @@
   }
 </style>
 
-<div class="row mt-5 order-page">
+<div class="row g-0 order-page px-3 p-2 my-3">
+  <!-- <div class="d-flex align-items-center"> -->
   <% for(order of orders){ %>
-  <div class="card col-8 mt-3 mb-3 p-2" style="max-width: 900px">
-    <div class="row g-0 d-flex align-items-center">
-      <div>
-        <div class="card-body">
-          <h5 class="card-title fs-6">Order ID : <%= order._id %></h5>
-          <small class="text-muted">Items list: </small>
-          <ol>
-            <% for(item of order.items) {%>
-            <li>
-              <p class="card-text"><%=item.title %></p>
-            </li>
-            <% } %>
-          </ol>
-          <p class="card-text mt-5">
-            Total Amount : Rs. <%=order.totalAmount %>
-          </p>
-          <p class="card-text">
-            <small class="text-muted"> Status - <%=order.status %></small><br />
-            <small class="text-muted"
-              >Order time - <%= order.orderDate.toString().slice(16,25) %>
-            </small>
-          </p>
-          <a
-            class="btn btn-secondary"
-            href="/admin/order/edit/<%= order._id  %>"
-            >Edit Status</a
-          >
-        </div>
-      </div>
+  <div class="card col-lg-8 col-md-8 p-2" style="min-width: 300px">
+    <div class="card-body">
+      <h5 class="card-title fs-6">Order ID : <%= order._id %></h5>
+      <small class="text-muted">Items list: </small>
+      <ol>
+        <% for(item of order.items) {%>
+        <li>
+          <p class="card-text"><%=item.title %></p>
+        </li>
+        <% } %>
+      </ol>
+      <p class="card-text mt-5">Total Amount : Rs. <%=order.totalAmount %></p>
+      <p class="card-text">
+        <small class="text-muted"> Status - <%=order.status %></small><br />
+        <small class="text-muted"
+          >Order time - <%= order.orderDate.toString().slice(16,25) %>
+        </small>
+      </p>
+      <a class="btn btn-secondary" href="/admin/order/edit/<%= order._id  %>"
+        >Edit Status</a
+      >
     </div>
   </div>
   <% } %>
 </div>
+<!-- </div> -->

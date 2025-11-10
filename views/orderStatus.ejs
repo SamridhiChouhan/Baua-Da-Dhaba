@@ -2,8 +2,9 @@
 <style>
   .orderStatus-page{
     background-image: url("/Dhaba white bg.png");
-    height: 100%;
-    
+    /* background-color: #f9f7f8; */
+
+    height: 100%; 
   }
   .orderStatus-page .card{
     
@@ -13,17 +14,13 @@
   }
 </style>
 
-<div class="orderStatus-page p-5">
-<div class="card p-2" style="max-width: 900px">
-  <div class="row g-0 d-flex align-items-center">
+<div class="orderStatus-page px-4 py-5">
+  <div class="row">
+<div class="card p-2 col-lg-7  col-md-8" >
+  <div class="d-flex align-items-center">
     <div>
       <div class="card-body">
         <h5 class="card-title"></h5>
-        <!-- <p class="card-text"></p>
-          <p class="card-text"></p>
-          <p class="card-text">
-            <small class="text-muted"></small>
-          </p> -->
         <small class="text-muted">Items list: </small>
           <ol>
             <% for(item of order.items) {%>
@@ -64,4 +61,4 @@
     </div>
   </div>
 </div>
-</div>
+</div></div>

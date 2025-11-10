@@ -41,3 +41,12 @@ async function addToCart(id) {
     }, 3000);
   }
 }
+
+// for adding box-shadow in navbar
+let btn = document.querySelector(".navbar-toggler");
+btn.addEventListener("click", () => {
+  let navbar = document.querySelector(".navbar");
+  navbar.classList.toggle("shadow");
+  navbar.classList.toggle("bg-body-tertiary");
+  navbar.classList.toggle("rounded");
+});

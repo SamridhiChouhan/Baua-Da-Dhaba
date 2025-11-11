@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
+}
 const express = require("express");
 let app = express();
 const port = 8080;
@@ -7,6 +10,7 @@ const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const User = require("./models/user.js");
 
@@ -20,14 +24,13 @@ const adminRouter = require("./routes/admin.js");
 const userRouter = require("./routes/user.js");
 
 app.engine("ejs", ejsMate);
-// app.use(express.static("views"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-const dbUrl = "mongodb://127.0.0.1:27017/Dhaba";
+const dbUrl = process.env.MONGO_ATLAS;
 async function main() {
   await mongoose.connect(dbUrl);
 }
@@ -38,8 +41,17 @@ main()
   })
   .catch((err) => console.log(err));
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
 const sessioOptions = {
-  secret: "mysupersecretcode",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {

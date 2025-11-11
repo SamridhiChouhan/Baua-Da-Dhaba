@@ -6,6 +6,12 @@
     .menu-page h3{
        color: #69585a; 
     }
+    @media (max-width: 850px) {
+      .menu-page{
+        margin: 3rem 0rem !important;
+      }
+    
+    }
 </style>
 
 <div class="menu-page row mt-5" id="menu-index">
@@ -14,7 +20,7 @@
     From spicy curries to sweet desserts — everything at <strong>Baua Da Dhabaa</strong> is cooked with love.
   </p>
   <% for(let foodItem of foodList){ %>
-  <div class="card m-3 mb-5 p-2" style="width: 15rem">
+  <div class="card m-1 m-lg-3 m-md-3 mb-3 mb-lg-3 p-2 col-5 col-lg-2 col-md-3">
     <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 10rem ;" />
     <div class="card-body py-1">
       <h5 class="card-title"><%= foodItem.title %></h5>

@@ -112,6 +112,9 @@
     background-image: url("/about logo(1).png");
     background-size: cover;
   }
+  .about-main-text {
+    width: 45%;
+  }
 
   @keyframes visible {
     from {
@@ -121,10 +124,34 @@
       opacity: 1;
     }
   }
+
+  @media (max-width: 850px) {
+    .about-main-text {
+      width: 100%;
+    }
+  }
+  @media (max-width: 480px) {
+    .about-main-head {
+      scale: 0.9;
+    }
+    .about-hero-img {
+      scale: 0.9;
+    }
+    .about-services .card {
+      scale: 0.9;
+    }
+  }
+  @media (max-width: 360px) {
+    .about-main-head {
+      scale: 0.7;
+    }
+  }
 </style>
 
-<div class="about-hero d-flex align-items-center justify-content-center px-5">
-  <div class="about-hero-img m-5 d-flex align-items-end">
+<div
+  class="about-hero d-flex align-items-center justify-content-center flex-column flex-lg-row flex-md-row flex-column px-2"
+>
+  <div class="about-hero-img d-flex align-items-end my-5 mx-0 mx-lg-5">
     <div class="about-hero-inner"></div>
   </div>
   <div class="about-hero-text d-flex flex-column align-items-center">
@@ -138,7 +165,7 @@
 
 <!-- about-boxes -->
 
-<div class="about-services d-flex justify-content-center p-2">
+<div class="about-services d-flex justify-content-center flex-wrap p-2">
   <div class="card m-3 mb-5 p-3" style="width: 20rem">
     <div class="card-body py-1 d-flex flex-column align-items-center">
       <div class="card-icon d-flex align-items-center justify-content-center">
@@ -183,13 +210,17 @@
 
 <div class="about-element"></div>
 
-<div class="about-main d-flex align-items-center justify-content-center p-5">
-  <div class="about-main-head d-flex flex-column align-items-center me-5">
+<div
+  class="about-main d-flex align-items-center justify-content-center p-5 flex-wrap"
+>
+  <div
+    class="about-main-head d-flex flex-column align-items-center me-lg-5 me-md-5 me-sm-5 me-0"
+  >
     <div class="about-main-cooking"></div>
     <!-- <h3 class="text-center fs-1">Our Story</h3> -->
     <!-- <div class="about-main-img"></div> -->
   </div>
-  <div class="about-main-text px-5" style="width: 40%">
+  <div class="about-main-text px-0 px-lg-5 px-md-5 my-5">
     <h3 class="fs-1">Our Story</h3>
     <p>
       “Baua Da Dhabaa” started with one simple idea — to bring the true desi
@@ -208,7 +239,7 @@
 <div
   class="about-end d-flex flex-column align-items-center justify-content-center mt-5 p-5"
 >
-  <p class="px-5 pt-5 mt-5 text-center">
+  <p class="px-0 px-lg-5 px-md-5 pt-5 mt-5 text-center">
     We believe that great food doesn’t need fancy ingredients, just a lot of
     heart. From traditional curries and soft rotis to our signature chai,
     everything here is made fresh with love.

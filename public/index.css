@@ -8,8 +8,14 @@ body {
   flex: 1;
 }
 
-html {
+html,
+body {
   scroll-behavior: smooth;
+  margin: 0;
+  overflow-x: hidden; /* hides extra scroll*/
+  height: 100%;
+  width: 100%;
+  /* background: radial-gradient(circle at center, #0a0a2a 0%, #000010 100%); */
 }
 /* index page-menu*/
 
@@ -137,7 +143,7 @@ html {
 
 /* Menu-page */
 .menu-section {
-  margin: 6rem 3rem !important;
+  margin: 6rem 6rem !important;
 }
 
 .menu-section h3 {
@@ -160,9 +166,6 @@ html {
   height: 25rem;
   background-color: rgb(78, 139, 78);
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .contact-img {
@@ -179,6 +182,7 @@ html {
   position: relative;
   top: 11rem;
   right: 4rem;
+  flex-shrink: 0;
 }
 .contact-text h3 {
   font-weight: 600;

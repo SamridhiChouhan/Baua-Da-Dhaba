@@ -1,5 +1,80 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+  @media (max-width: 850px) {
+      .menu-section{
+        margin: 3rem 0rem !important;
+      }
+      .menu-section h3{
+        padding-left: 0;
+        padding-left: 3rem;
+      }
+      .contact-element{
+        /* right: 1rem; */
+        /* width: 15rem; */
+        /* scale: 0.8; */
+        /* position: absolute; */
+      }
+    }
+  @media (max-width: 650px) {
+    .about-text{
+      padding: 8rem 2rem;
+    }
+    .hero-info{
+      padding-left: 0;
+    }
+    .hero-img{
+      scale: 0.9 ;
+    }
+    
+  }
+  @media (max-width: 650px) {
+    .contact-element{
+        right: 0rem;
+        height: 8rem;
+        width: 8rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .hero-sec{
+      flex-direction: column;
+      background-color: #f9f7f8;
+      padding: 0;
+     }
+    .hero-info{
+      background-image: url("/Dhaba bg(1).png");
+      background-size: cover;
+      width: 100%;
+      height: 20rem;
+      align-items: center;
+      padding: 2rem;
+      padding-top: 8rem;
+    }
+    .hero-img{
+       scale:0.7;
+       background-size: cover;
+       width: 100%;
+     }
+    .h-img-big{
+       top: -2rem;
+    }
+    .h-img-small{
+       bottom: 15rem;
+    }
+    .hero-sec div{
+       width: 100%;
+    }
 
+    .about-text{
+       height: 40rem;
+     }
+     .contact-element{
+        /* right: 0rem; */
+        /* scale: 0.8; */
+        display: none;
+        
+    }
+  }
+</style>
 
 <div class="hero-sec">
   <div class="hero-info">
@@ -27,10 +102,12 @@ Explore our most-loved dishes below and add your favorites to the cart!</p>
   <div class="about-bg"></div>
 </div>
 
+
+
 <div class="menu-section row mt-5 " id="menu-index">
-  <h3>Our Menu</h3>
+  <h3 class="mt-5">Our Menu</h3>
   <% for(let foodItem of foodList){ %>
-  <div class="card m-3 mb-5 p-2 " style="width: 15rem">
+  <div class="card m-1 m-lg-3 m-md-3 mb-3 mb-lg-3 p-2 col-5 col-lg-2 col-md-3" >
     <img src="<%= foodItem.image.url %>" class="card-img-top"  style="height: 10rem ;" />
     <div class="card-body py-1">
       <h5 class="card-title"><%= foodItem.title %></h5>
@@ -46,9 +123,9 @@ Explore our most-loved dishes below and add your favorites to the cart!</p>
    </a>
 </div>
 
-<div class="contact-sec">
+<div class="contact-sec d-flex align-items-center justify-content-end">
      <div class="contact-element"></div>
-     <div class="contact-text">
+     <div class="contact-text ps-3">
         <h3>Have a question, craving, or feedback?</h3>
         <p>Call us at +91 98765 43210 or message at support@bauadadhabaa.com — our team will respond faster than your order arrives!</p>
         <a href="/contact" class="btn btn-outline-light">Contact Us</a>

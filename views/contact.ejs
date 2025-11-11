@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 <style>
   .contact-intro-page {
-    height: 80vh;
+    height: 35rem;
     width: 100%;
     color: white;
     background-color: #58aba8;
@@ -24,12 +24,39 @@
   .contact-page {
     background-color: #f9f7f8;
   }
+
+  @media (max-width: 1280px) {
+    .contact-intro-page {
+      padding: 5rem 10vw !important;
+    }
+  }
+  @media (max-width: 850px) {
+    .contact-intro-page {
+      padding: 5rem 7vw !important;
+      padding-right: 2vw !important;
+    }
+    .contact-chai {
+      scale: 0.9;
+    }
+  }
+  @media (max-width: 560px) {
+    .contact-info {
+      width: 20rem;
+    }
+  }
+  @media (max-width: 360px) {
+    .contact-info {
+      width: 18rem;
+    }
+  }
 </style>
 
 <div class="contact-intro-page p-5">
   <!-- <div class="contact-chai"></div> -->
   <h3 class="fs-1 fw-bold"><i>Lets Talk over chai</i></h3>
-  <div class="d-flex align-items-center">
+  <div
+    class="d-flex align-items-center flex-lg-row flex-md-row flex-sm-row flex-column"
+  >
     <div>
       <p>Got feedback, a food idea, or just missing ghar ka khana?</p>
       <p>
@@ -40,10 +67,12 @@
   </div>
 </div>
 
-<div class="contact-page p-5">
+<div class="contact-page p-3">
   <div class="contact-main-page d-flex flex-column align-items-center my-5">
     <div class="contact-info d-flex align-items-center m-3">
-      <div class="p-4 fs-4 mx-3"><i class="fa-solid fa-location-dot"></i></div>
+      <div class="p-4 fs-4 mx-1 mx-lg-3 mx-md-3">
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
       <div>
         <small class="text-muted">Address</small>
         <p>Baua Da Dhabaa, Near Old Market, Kota</p>
@@ -51,7 +80,9 @@
     </div>
 
     <div class="contact-info d-flex align-items-center m-3">
-      <div class="p-4 fs-4 mx-3"><i class="fa-solid fa-phone"></i></div>
+      <div class="p-4 fs-4 mx-1 mx-lg-3 mx-md-3">
+        <i class="fa-solid fa-phone"></i>
+      </div>
       <div>
         <small class="text-muted">Contact No.</small>
         <p>+91 8956462655</p>
@@ -59,7 +90,9 @@
     </div>
 
     <div class="contact-info d-flex align-items-center m-3">
-      <div class="p-4 fs-4 mx-3"><i class="fa-solid fa-envelope"></i></div>
+      <div class="p-4 fs-4 mx-1 mx-lg-3 mx-md-3">
+        <i class="fa-solid fa-envelope"></i>
+      </div>
       <div>
         <small class="text-muted">Email Address</small>
         <p>bauadadhabaa@gmail.com</p>
@@ -67,7 +100,7 @@
     </div>
   </div>
 
-  <div class="contact-end text-center text-muted m-5">
+  <div class="contact-end text-center text-muted my-5 mx-2 mx-lg-5">
     <p>
       Your thoughts mean a lot to us — every message helps us make your next
       meal even better.

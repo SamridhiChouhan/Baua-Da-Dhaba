@@ -1,15 +1,6 @@
 <% layout("/layouts/adminPanel") %>
 
-<style>
-  .order-page .card {
-    border: none;
-    background-color: #f9f7f8;
-    box-shadow: 1px 1px 3px grey;
-  }
-</style>
-
 <div class="row g-0 order-page px-3 p-2 my-3">
-  <!-- <div class="d-flex align-items-center"> -->
   <% for(order of orders){ %>
   <div class="card col-lg-8 col-md-8 p-2" style="min-width: 300px">
     <div class="card-body">

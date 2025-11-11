@@ -15,8 +15,8 @@ body {
   overflow-x: hidden; /* hides extra scroll*/
   height: 100%;
   width: 100%;
-  /* background: radial-gradient(circle at center, #0a0a2a 0%, #000010 100%); */
 }
+
 /* index page-menu*/
 
 .row {
@@ -134,11 +134,119 @@ body {
 .about-text p {
   font-size: 0.9;
 }
+
+.about-text h4,
+.about-text h5,
+.about-text p,
+.about-text a,
+.contact-sec h3,
+.contact-sec p,
+.contact-sec a,
+.about-main h3,
+.about-main p {
+  animation: visible 0.01s ease-in;
+  animation-timeline: view(50% auto);
+}
+
 .about-bg {
   height: 25vh;
   width: 100%;
   background-image: url("/wave Dhaba.png");
   background-size: cover;
+}
+/* About-page */
+.about-hero {
+  height: 85vh;
+  background-color: #f9f7f8;
+}
+
+.about-hero-img {
+  background-image: url("/momo dhaba.png");
+  background-size: cover;
+  height: 25rem;
+  width: 25rem;
+  margin-top: 6rem !important;
+  animation: clockwise 0.01s ease-in;
+  animation-timeline: scroll();
+  position: relative;
+}
+
+.about-hero-text {
+  position: relative;
+}
+.about-hero-inner {
+  background-image: url("/samosa dhaba.png");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  transform: rotate(180deg);
+  position: relative;
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0.3s;
+}
+
+.about-hero-inner:hover {
+  opacity: 1;
+}
+.about-main-img {
+  background-image: url("/leaves dhaba .png");
+  background-size: cover;
+  height: 8rem;
+  width: 10rem;
+  position: relative;
+  right: 8rem;
+  top: 9rem;
+}
+
+.about-main-head {
+  border: 0.5rem solid pink;
+  transform: rotate(-10deg);
+  border-radius: 2px;
+}
+
+.about-main-cooking {
+  height: 30rem;
+  width: 20rem;
+  background-image: url("cooking.jpg");
+  background-size: cover;
+  background-color: #f9f7f8;
+  transform: rotate(10deg);
+}
+
+.about-element {
+  height: 15rem;
+  background-image: url("/grey wave.png");
+  background-size: cover;
+}
+
+.about-services {
+  background-color: #f9f7f8;
+}
+.about-services .card {
+  border: none;
+}
+
+.about-services .card-icon {
+  background-color: #f9f7f8;
+  color: red;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+}
+
+.about-end {
+  background-color: rgb(250, 130, 87);
+  color: white;
+}
+
+.about-end-img {
+  height: 5rem;
+  width: 5rem;
+  background-image: url("/about logo(1).png");
+  background-size: cover;
+}
+.about-main-text {
+  width: 45%;
 }
 
 /* Menu-page */
@@ -158,6 +266,21 @@ body {
   bottom: 20px;
   width: max-content;
   z-index: 999;
+}
+
+.menu-card,
+.about-card,
+.contact-info,
+.admin-card {
+  transition: all 0.1s ease-in-out;
+}
+
+.menu-card:hover,
+.about-card:hover,
+.contact-info:hover,
+.admin-card:hover {
+  scale: 1.05;
+  box-shadow: 2px 2px 5px grey;
 }
 
 /* Contact-section */
@@ -189,6 +312,31 @@ body {
   font-size: 2rem;
 }
 
+/* Contact-page */
+.contact-intro-page {
+  height: 35rem;
+  width: 100%;
+  color: white;
+  background-color: #58aba8;
+  padding: 5rem 20vw !important;
+}
+
+.contact-chai {
+  width: 20rem;
+  height: 20rem;
+  background-image: url("/chai dhaba (2).png");
+  background-size: cover;
+}
+.contact-info {
+  background-color: white;
+  box-shadow: 2px 2px 5px grey;
+  border-radius: 10px;
+  width: 30rem;
+}
+.contact-page {
+  background-color: #f9f7f8;
+}
+
 /* footer */
 .f-info-links a {
   text-decoration: none;
@@ -214,8 +362,6 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: #ededed;
-  /* position: absolute; */
-  /* bottom: 0; */
 }
 
 .f-info-links,
@@ -256,12 +402,131 @@ body {
 /* user-login,signup */
 
 .user-box form {
-  /* border: none; */
   box-shadow: 2px 2px 5px grey;
 }
 .btn-user {
   background-color: #ff4814;
   border: none;
+}
+
+/* Menu-page */
+.menu-page {
+  margin: 3rem 3rem !important;
+}
+.menu-page h3 {
+  color: #69585a;
+}
+
+/* Flashes */
+.alert {
+  position: fixed;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+/* Admin-Dashboard */
+.admin-img {
+  height: 8rem;
+  width: 8rem;
+  object-fit: cover;
+  flex-shrink: 0 !important;
+}
+
+/* Edit-page */
+.edit-page {
+  height: 95vh;
+  background-image: url("/Dhaba white bg.png");
+}
+
+.edit-page input,
+textarea {
+  box-shadow: 1px 1px 2px grey;
+}
+
+.edit-page h4 {
+  color: #69585a;
+}
+
+/* Order-page */
+.order-page .card {
+  border: none;
+  background-color: #f9f7f8;
+  box-shadow: 1px 1px 3px grey;
+}
+
+/* Orderhistory */
+.order-history-page .card {
+  border: none;
+  background-color: #f9f7f8;
+  box-shadow: 1px 1px 3px grey;
+}
+.order-title-s {
+  color: black !important;
+}
+.order-date-p p {
+  margin: 0 !important;
+}
+
+/* OrderStatus */
+.orderStatus-page {
+  background-image: url("/Dhaba white bg.png");
+  height: 100%;
+}
+.orderStatus-page .card {
+  border: none;
+  box-shadow: 1px 1px 3px grey;
+}
+
+/* OrderSuccess */
+.order-success {
+  /* flex: 1; */
+  height: 75vh;
+  background-color: rgb(78, 139, 78);
+  color: white;
+}
+.order-success a {
+  height: 20%;
+  color: white;
+  font-size: 1.5rem;
+}
+.order-success-text {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.order-success-icon {
+  border: 3px rgb(78, 139, 78);
+  border-style: dotted;
+  height: 6rem;
+  width: 6rem;
+  background-color: white;
+  border-radius: 50%;
+  color: rgb(78, 139, 78);
+  margin: 1rem;
+}
+.order-success-icon i {
+  font-size: 3rem;
+}
+
+/* Cart */
+.cart-box {
+  width: max-content;
+  border: 1px solid grey;
+  border-radius: 1rem;
+}
+.cartitem-info {
+  width: 60%;
+}
+.cartitem-img {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+.intro-text h5 {
+  font-size: 1rem;
 }
 
 /* Animations */
@@ -280,5 +545,137 @@ body {
   }
   to {
     transform: none;
+  }
+}
+
+@keyframes visible {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* responsive */
+
+@media (max-width: 1280px) {
+  .contact-intro-page {
+    padding: 5rem 10vw !important;
+  }
+}
+
+@media (max-width: 850px) {
+  /* user-page */
+  .menu-page {
+    margin: 3rem 0rem !important;
+  }
+  .about-main-text {
+    width: 100%;
+  }
+  .contact-intro-page {
+    padding: 5rem 7vw !important;
+    padding-right: 2vw !important;
+  }
+  .contact-chai {
+    scale: 0.9;
+  }
+  .menu-section {
+    margin: 3rem 0rem !important;
+  }
+  .menu-section h3 {
+    padding-left: 0;
+    padding-left: 3rem;
+  }
+}
+
+@media (max-width: 650px) {
+  /* user-page */
+  .about-text {
+    padding: 8rem 2rem;
+  }
+  .hero-info {
+    padding-left: 0;
+  }
+  .hero-img {
+    scale: 0.9;
+  }
+  .contact-element {
+    right: 0rem;
+    height: 8rem;
+    width: 8rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-info {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* user-page */
+  .about-main-head {
+    scale: 0.9;
+  }
+  .about-hero-img {
+    scale: 0.9;
+  }
+  .about-services .card {
+    scale: 0.9;
+  }
+  .hero-sec {
+    flex-direction: column;
+    background-color: #f9f7f8;
+    padding: 0;
+  }
+  .hero-info {
+    background-image: url("/Dhaba bg(1).png");
+    background-size: cover;
+    width: 100%;
+    height: 20rem;
+    align-items: center;
+    padding: 2rem;
+    padding-top: 8rem;
+  }
+  .hero-img {
+    scale: 0.7;
+    background-size: cover;
+    width: 100%;
+  }
+  .h-img-big {
+    top: -2rem;
+  }
+  .h-img-small {
+    bottom: 15rem;
+  }
+  .hero-sec div {
+    width: 100%;
+  }
+
+  .about-text {
+    height: 40rem;
+  }
+  .contact-element {
+    display: none;
+  }
+}
+@media (max-width: 360px) {
+  .about-main-head {
+    scale: 0.7;
+  }
+  .contact-info {
+    width: 18rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .cart-area {
+    scale: 0.9;
+  }
+  .cart-order,
+  .cart-add {
+    display: block;
+    margin-bottom: 1rem;
   }
 }

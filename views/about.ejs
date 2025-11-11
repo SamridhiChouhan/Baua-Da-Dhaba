@@ -1,153 +1,5 @@
 <% layout("/layouts/boilerplate") %>
 
-<style>
-  .about-hero {
-    height: 85vh;
-    background-color: #f9f7f8;
-    /* background-color: black; */
-    /* color: white; */
-  }
-  .about-hero-img {
-    background-image: url("/momo dhaba.png");
-    /* background-color: antiquewhite; */
-    background-size: cover;
-    height: 25rem;
-    width: 25rem;
-    margin-top: 6rem !important;
-    animation: clockwise 0.01s ease-in;
-    animation-timeline: scroll();
-    position: relative;
-    /* right: 25rem; */
-    /* bottom: 2rem; */
-  }
-  .about-hero-text {
-    position: relative;
-    /* right: 10rem; */
-  }
-  .about-hero-inner {
-    background-image: url("/samosa dhaba.png");
-    /* background-color: pink; */
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    /* width: 50rem; */
-    transform: rotate(180deg);
-    position: relative;
-    opacity: 0;
-    /* top: 25rem; */
-    transition: all 0.3s ease-in-out 0.3s;
-  }
-
-  .about-hero-inner:hover {
-    opacity: 1;
-  }
-  .about-main-img {
-    background-image: url("/leaves dhaba .png");
-    background-size: cover;
-    height: 8rem;
-    width: 10rem;
-    position: relative;
-    right: 8rem;
-    /* bottom: 1.5rem; */
-    top: 9rem;
-  }
-
-  .about-main {
-    /* background-color: rgb(253, 162, 87); */
-    /* color: white; */
-    /* background-color: rgb(249, 121, 74); */
-    /* background-color: black; */
-  }
-
-  .about-main-head {
-    border: 0.5rem solid pink;
-    transform: rotate(-10deg);
-    border-radius: 2px;
-  }
-
-  .about-main-cooking {
-    height: 30rem;
-
-    width: 20rem;
-    background-image: url("cooking.jpg");
-    background-size: cover;
-    background-color: #f9f7f8;
-    transform: rotate(10deg);
-    /* border: 1rem solid pink; */
-  }
-
-  .about-element {
-    height: 15rem;
-    background-image: url("/grey wave.png");
-    background-size: cover;
-    /* background-color: rgb(249, 121, 74);
-     */
-    /* background-color: black; */
-  }
-
-  .about-services {
-    background-color: #f9f7f8;
-  }
-  .about-services .card {
-    border: none;
-  }
-
-  .about-services .card-icon {
-    background-color: #f9f7f8;
-    color: red;
-    height: 4rem;
-    width: 4rem;
-    border-radius: 50%;
-  }
-
-  .about-end {
-    /* background-color: black; */
-    background-color: rgb(250, 130, 87);
-    color: white;
-  }
-
-  .about-end-img {
-    height: 5rem;
-    width: 5rem;
-    background-image: url("/about logo(1).png");
-    background-size: cover;
-  }
-  .about-main-text {
-    width: 45%;
-  }
-
-  @keyframes visible {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: 850px) {
-    .about-main-text {
-      width: 100%;
-    }
-  }
-  @media (max-width: 480px) {
-    .about-main-head {
-      scale: 0.9;
-    }
-    .about-hero-img {
-      scale: 0.9;
-    }
-    .about-services .card {
-      scale: 0.9;
-    }
-  }
-  @media (max-width: 360px) {
-    .about-main-head {
-      scale: 0.7;
-    }
-  }
-</style>
-
 <div
   class="about-hero d-flex align-items-center justify-content-center flex-column flex-lg-row flex-md-row flex-column px-2"
 >
@@ -166,7 +18,7 @@
 <!-- about-boxes -->
 
 <div class="about-services d-flex justify-content-center flex-wrap p-2">
-  <div class="card m-3 mb-5 p-3" style="width: 20rem">
+  <div class="card about-card m-3 mb-5 p-3" style="width: 20rem">
     <div class="card-body py-1 d-flex flex-column align-items-center">
       <div class="card-icon d-flex align-items-center justify-content-center">
         <i class="fa-solid fa-truck-fast"></i>
@@ -180,7 +32,7 @@
     </div>
   </div>
 
-  <div class="card m-3 mb-5 p-3" style="width: 20rem">
+  <div class="card about-card m-3 mb-5 p-3" style="width: 20rem">
     <div class="card-body py-1 d-flex flex-column align-items-center">
       <div class="card-icon d-flex align-items-center justify-content-center">
         <i class="fa-solid fa-star"></i>
@@ -194,7 +46,7 @@
     </div>
   </div>
 
-  <div class="card m-3 mb-5 p-3" style="width: 20rem">
+  <div class="card about-card m-3 mb-5 p-3" style="width: 20rem">
     <div class="card-body py-1 d-flex flex-column align-items-center">
       <div class="card-icon d-flex align-items-center justify-content-center">
         <i class="fa-solid fa-leaf"></i>

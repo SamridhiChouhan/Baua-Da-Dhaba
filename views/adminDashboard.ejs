@@ -1,21 +1,10 @@
 <% layout("/layouts/adminPanel") %>
 
-<style>
-  .admin-img {
-    height: 8rem;
-    width: 8rem;
-    object-fit: cover;
-    flex-shrink: 0 !important;
-  }
-  @media (max-width: 5) {
-  }
-</style>
-
 <div
   class="mt-lg-5 d-flex flex-column align-items-center row mx-md-5 p-lg-0 p-4 g-0"
 >
   <% for(food of foodList){ %>
-  <div class="card mt-3 mb-3 p-lg-2 col-lg-8">
+  <div class="card admin-card mt-3 mb-3 p-lg-2 col-lg-8">
     <div class="row g-0 d-flex align-items-center">
       <div class="col-lg-2 mx-3 col-3">
         <img

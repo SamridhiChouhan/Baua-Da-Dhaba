@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 const dbUrl = process.env.MONGO_ATLAS;
+// const dbUrl = "mongodb://127.0.0.1:27017/Dhaba";
 async function main() {
   await mongoose.connect(dbUrl);
 }
